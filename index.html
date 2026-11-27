@@ -78,6 +78,19 @@ input::placeholder{color:#aa9ab9}
 }
 .note{font-size:12px;color:#a998b8;text-align:center}
 #message{color:#d5a5ff;text-align:center;overflow-wrap:anywhere}
+#adminDashboard{
+ margin-top:25px;padding-top:15px;
+ border-top:1px solid #49365c;
+}
+#ordersList{overflow-wrap:anywhere}
+.order-item{
+ background:#30213f;padding:12px;
+ border-radius:10px;margin:10px 0;
+}
+.order-item button{
+ background:#8b5cf6;color:white;border:0;
+ border-radius:8px;padding:10px;margin-top:8px;
+}
 </style>
 </head>
 
@@ -92,12 +105,12 @@ input::placeholder{color:#aa9ab9}
 <div id="loginArea">
 <p class="subtitle">Login to your account</p>
 
-<button class="login-btn google" onclick="auraGoogleLogin()">
+<button class="login-btn google" onclick="window.auraGoogleLogin()">
 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
 Continue with Google
 </button>
 
-<button class="login-btn facebook" onclick="auraFacebookLogin()">
+<button class="login-btn facebook" onclick="window.auraFacebookLogin()">
 <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
 <path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.3-1.5 1.6-1.5h1.7V3.7c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2H7.3V13h2.8v8h3.4z"/>
 </svg>
@@ -110,14 +123,14 @@ Continue with Facebook
 <input id="phoneNumber" type="tel" placeholder="+959xxxxxxxxx">
 <div id="recaptcha-container"></div>
 
-<button class="login-btn phone" onclick="sendOTP()">
+<button class="login-btn phone" onclick="window.sendOTP()">
 📱 Send OTP Code
 </button>
 
 <input id="otpCode" type="text" inputmode="numeric"
 placeholder="Enter 6-digit OTP">
 
-<button class="action" onclick="verifyOTP()">Verify OTP</button>
+<button class="action" onclick="window.verifyOTP()">Verify OTP</button>
 <p class="note">Phone number ကို နိုင်ငံကုဒ်နဲ့ ထည့်ပါ။</p>
 </div>
 
@@ -125,7 +138,7 @@ placeholder="Enter 6-digit OTP">
 <img id="userPhoto" alt="Profile">
 <h3 id="userName">User</h3>
 <p id="userEmail"></p>
-<button class="action logout" onclick="auraLogout()">Logout</button>
+<button class="action logout" onclick="window.auraLogout()">Logout</button>
 </div>
 
 <div class="section">
@@ -159,13 +172,24 @@ placeholder="Enter 6-digit OTP">
 <input id="transactionID" type="text"
 placeholder="Enter fake test ID">
 
-<button type="button" class="action" onclick="demoOrder()">
+<button type="button" class="action" onclick="window.demoOrder()">
 Confirm Demo Order
 </button>
 
 <p id="message"></p>
 <p class="note">Demo Order Only • No Real Payment</p>
 </div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="adminDashboard">
+<button class="action" onclick="window.auraLoadAdminOrders()">
+Load Admin Orders
+</button>
+<h2>✦ AURA ADMIN</h2>
+<h3>Customer Orders</h3>
+<div id="ordersList">Loading Orders...</div>
+</div>
+
 </div>
 
 <script>
@@ -218,17 +242,8 @@ window.demoOrder=async function(){
 </script>
 
 <script type="module">
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-window.addEventListener("error", (e) => {
- console.error("AURA ERROR:", e.message);
-});
 
-window.addEventListener("unhandledrejection", (e) => {
- console.error("AURA PROMISE ERROR:", e.reason);
-});
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 
 import {
  getAuth,GoogleAuthProvider,FacebookAuthProvider,
@@ -258,9 +273,9 @@ const firebaseConfig={
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
-window.auraFirebaseReady = true;
-window.auraFirebaseError = "";
+
 console.log("AURA Firebase Ready");
+
 const googleProvider=new GoogleAuthProvider();
 const facebookProvider=new FacebookAuthProvider();
 
@@ -271,66 +286,69 @@ window.auraSaveOrder=async(order)=>{
  return await addDoc(collection(db,"Orders"),order);
 };
 
-window.auraLoadAdminOrders = async () => {
-  const adminEmail = "ak0061266@gmail.com";
-  const user = auth.currentUser;
+window.auraLoadAdminOrders=async()=>{
+ const adminEmail="ak0061266@gmail.com";
+ const user=auth.currentUser;
 
-  if (!user || user.email !== adminEmail) {
-    alert("Admin access only!");
-    return;
+ if(!user||user.email!==adminEmail){
+  alert("Admin access only!");
+  return;
+ }
+
+ const dashboard=document.getElementById("adminDashboard");
+ const list=document.getElementById("ordersList");
+
+ dashboard.style.display="block";
+ list.textContent="Loading Orders...";
+
+ try{
+  const snapshot=await getDocs(collection(db,"Orders"));
+  list.replaceChildren();
+
+  if(snapshot.empty){
+   list.textContent="No Orders Yet";
+   return;
   }
 
-  const dashboard = document.getElementById("adminDashboard");
-  const list = document.getElementById("ordersList");
+  snapshot.forEach((orderDoc)=>{
+   const order=orderDoc.data();
+   const item=document.createElement("div");
+   item.className="order-item";
 
-  dashboard.style.display = "block";
-  list.textContent = "Loading Orders...";
+   const info=document.createElement("p");
 
-  try {
-    const snapshot = await getDocs(collection(db, "Orders"));
-    list.replaceChildren();
+   info.textContent=
+    "Order ID: "+orderDoc.id+
+    " | Player: "+order.playerID+
+    " | Server: "+order.serverID+
+    " | Product: "+order.product+
+    " | Price: "+order.price+
+    " MMK | Status: "+order.status;
 
-    if (snapshot.empty) {
-      list.textContent = "No Orders Yet";
-      return;
+   item.appendChild(info);
+
+   const btn=document.createElement("button");
+   btn.textContent="Mark Completed";
+
+   btn.onclick=async()=>{
+    try{
+     await updateDoc(doc(db,"Orders",orderDoc.id),{
+      status:"Completed"
+     });
+     alert("Order Completed!");
+     window.auraLoadAdminOrders();
+    }catch(error){
+     alert("Update Failed: "+error.message);
     }
+   };
 
-    snapshot.forEach((orderDoc) => {
-      const order = orderDoc.data();
-      const item = document.createElement("div");
-      const info = document.createElement("p");
+   item.appendChild(btn);
+   list.appendChild(item);
+  });
 
-      info.textContent =
-        "Order ID: " + orderDoc.id +
-        " | Player: " + order.playerID +
-        " | Server: " + order.serverID +
-        " | Product: " + order.product +
-        " | Price: " + order.price +
-        " MMK | Status: " + order.status;
-
-      item.appendChild(info);
-
-      const btn = document.createElement("button");
-      btn.textContent = "Mark Completed";
-
-      btn.onclick = async () => {
-        try {
-          await updateDoc(doc(db, "Orders", orderDoc.id), {
-            status: "Completed"
-          });
-          alert("Order Completed!");
-          window.auraLoadAdminOrders();
-        } catch (error) {
-          alert("Update Failed: " + error.message);
-        }
-      };
-
-      item.appendChild(btn);
-      list.appendChild(item);
-    });
-  } catch (error) {
-    list.textContent = "Error: " + error.message;
-  }
+ }catch(error){
+  list.textContent="Error: "+error.message;
+ }
 };
 
 window.auraGoogleLogin=async()=>{
@@ -348,11 +366,6 @@ window.auraFacebookLogin=async()=>{
   alert("Facebook Login: "+e.message);
  }
 };
-
-      item.appendChild(btn);
-      list.appendChild(item); {
-    list.textContent = "Error: " + error.message;
-  }
 
 let confirmationResult=null;
 let recaptchaVerifier=null;
@@ -435,15 +448,7 @@ onAuthStateChanged(auth,user=>{
   login.style.display="block";
  }
 });
+
 </script>
-<!-- ADMIN DASHBOARD -->
-<div id="adminDashboard">
-  <button onclick="window.auraLoadAdminOrders()">
-  Load Admin Orders
-  </button>
-  <h2>✦ AURA ADMIN</h2>
-  <h3>Customer Orders</h3>
-  <div id="ordersList">Loading Orders...</div>
-</div>
 </body>
 </html>
