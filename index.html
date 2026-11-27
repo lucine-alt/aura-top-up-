@@ -228,7 +228,12 @@ import {
 } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
 import {
- getFirestore,collection,addDoc
+ getFirestore,
+ collection,
+ addDoc,
+ getDocs,
+ doc,
+ updateDoc
 } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 
 const firebaseConfig={
@@ -253,6 +258,68 @@ window.auraSaveOrder=async(order)=>{
   throw new Error("Please login first.");
  }
  return await addDoc(collection(db,"Orders"),order);
+};
+
+window.auraLoadAdminOrders = async () => {
+  const adminEmail = "ak0061266@gmail.com";
+  const user = auth.currentUser;
+
+  if (!user || user.email !== adminEmail) {
+    alert("Admin access only!");
+    return;
+  }
+
+  const dashboard = document.getElementById("adminDashboard");
+  const list = document.getElementById("ordersList");
+
+  dashboard.style.display = "block";
+  list.textContent = "Loading Orders...";
+
+  try {
+    const snapshot = await getDocs(collection(db, "Orders"));
+    list.replaceChildren();
+
+    if (snapshot.empty) {
+      list.textContent = "No Orders Yet";
+      return;
+    }
+
+    snapshot.forEach((orderDoc) => {
+      const order = orderDoc.data();
+      const item = document.createElement("div");
+      const info = document.createElement("p");
+
+      info.textContent =
+        "Order ID: " + orderDoc.id +
+        " | Player: " + order.playerID +
+        " | Server: " + order.serverID +
+        " | Product: " + order.product +
+        " | Price: " + order.price +
+        " MMK | Status: " + order.status;
+
+      item.appendChild(info);
+
+      const btn = document.createElement("button");
+      btn.textContent = "Mark Completed";
+
+      btn.onclick = async () => {
+        try {
+          await updateDoc(doc(db, "Orders", orderDoc.id), {
+            status: "Completed"
+          });
+          alert("Order Completed!");
+          window.auraLoadAdminOrders();
+        } catch (error) {
+          alert("Update Failed: " + error.message);
+        }
+      };
+
+      item.appendChild(btn);
+      list.appendChild(item);
+    });
+  } catch (error) {
+    list.textContent = "Error: " + error.message;
+  }
 };
 
 window.auraGoogleLogin=async()=>{
@@ -353,6 +420,14 @@ onAuthStateChanged(auth,user=>{
  }
 });
 </script>
-
+<!-- ADMIN DASHBOARD -->
+<div id="adminDashboard" style="display:none;">
+  <button onclick="window.auraLoadAdminOrders()">
+  Load Admin Orders
+  </button>
+  <h2>✦ AURA ADMIN</h2>
+  <h3>Customer Orders</h3>
+  <div id="ordersList">Loading Orders...</div>
+  </div>
 </body>
 </html>
