@@ -219,6 +219,7 @@ window.demoOrder=async function(){
 
 <script type="module">
 import {initializeApp}
+from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 window.addEventListener("error", (e) => {
  console.error("AURA ERROR:", e.message);
 });
@@ -226,6 +227,7 @@ window.addEventListener("error", (e) => {
 window.addEventListener("unhandledrejection", (e) => {
  console.error("AURA PROMISE ERROR:", e.reason);
 });
+import {initializeApp}
 from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 
 import {
@@ -348,13 +350,9 @@ window.auraFacebookLogin=async()=>{
 };
 
       item.appendChild(btn);
-      list.appendChild(item);
-    });
-
-  } catch (error) {
+      list.appendChild(item); {
     list.textContent = "Error: " + error.message;
   }
-};
 
 let confirmationResult=null;
 let recaptchaVerifier=null;
