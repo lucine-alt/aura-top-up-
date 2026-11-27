@@ -219,6 +219,13 @@ window.demoOrder=async function(){
 
 <script type="module">
 import {initializeApp}
+window.addEventListener("error", (e) => {
+ console.error("AURA ERROR:", e.message);
+});
+
+window.addEventListener("unhandledrejection", (e) => {
+ console.error("AURA PROMISE ERROR:", e.reason);
+});
 from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 
 import {
@@ -250,6 +257,7 @@ const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
 window.auraFirebaseReady = true;
+window.auraFirebaseError = "";
 console.log("AURA Firebase Ready");
 const googleProvider=new GoogleAuthProvider();
 const facebookProvider=new FacebookAuthProvider();
@@ -438,6 +446,6 @@ onAuthStateChanged(auth,user=>{
   <h2>✦ AURA ADMIN</h2>
   <h3>Customer Orders</h3>
   <div id="ordersList">Loading Orders...</div>
-</>
+</div>
 </body>
 </html>
