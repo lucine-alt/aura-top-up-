@@ -1,5 +1,5 @@
 
-<!DOCTYPE html
+<!DOCTYPE html>
 <html lang="my">
 <head>
 <meta charset="UTF-8">
@@ -336,6 +336,15 @@ window.auraFacebookLogin=async()=>{
  }catch(e){
   alert("Facebook Login: "+e.message);
  }
+};
+
+      item.appendChild(btn);
+      list.appendChild(item);
+    });
+
+  } catch (error) {
+    list.textContent = "Error: " + error.message;
+  }
 };
 
 let confirmationResult=null;
