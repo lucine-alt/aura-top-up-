@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="my">
 <head>
@@ -10,34 +11,25 @@
 body{
  margin:0;padding:18px 14px;
  background:linear-gradient(150deg,#10091e,#211039,#10091e);
- color:white;font-family:Arial,sans-serif;
- min-height:100vh;
+ color:white;font-family:Arial,sans-serif;min-height:100vh;
 }
 .container{
- width:100%;max-width:430px;
- margin:20px auto;padding:22px;
- background:#20152f;
- border:1px solid #50356c;
- border-radius:22px;
- box-shadow:0 12px 40px #0008;
+ width:100%;max-width:430px;margin:20px auto;padding:22px;
+ background:#20152f;border:1px solid #50356c;
+ border-radius:22px;box-shadow:0 12px 40px #0008;
 }
 .logo{text-align:center;margin-bottom:22px}
-.logo h1{
- margin:0;color:#d5a5ff;
- font-size:30px;letter-spacing:2px;
-}
+.logo h1{margin:0;color:#d5a5ff;font-size:30px;letter-spacing:2px}
 .logo p{color:#b8a5cc;font-size:13px}
 h2{font-size:19px}
 h3{font-size:16px}
 .subtitle{text-align:center;color:#bbaaca;font-size:14px}
 button,input,select{font:inherit}
 .login-btn{
- width:100%;height:49px;margin:7px 0;
- border:0;border-radius:12px;
- display:flex;align-items:center;
- justify-content:center;gap:12px;
- font-size:15px;font-weight:bold;
- cursor:pointer;
+ width:100%;height:49px;margin:7px 0;border:0;
+ border-radius:12px;display:flex;align-items:center;
+ justify-content:center;gap:12px;font-size:15px;
+ font-weight:bold;cursor:pointer;
 }
 .google{background:#fff;color:#222}
 .facebook{background:#1877f2;color:white}
@@ -52,32 +44,26 @@ button,input,select{font:inherit}
  content:"";height:1px;background:#514064;flex:1;
 }
 input,select{
- width:100%;height:47px;
- margin:7px 0;padding:0 13px;
- border:1px solid #503d68;
- border-radius:10px;
- background:#30213f;color:white;
- outline:none;
+ width:100%;height:47px;margin:7px 0;padding:0 13px;
+ border:1px solid #503d68;border-radius:10px;
+ background:#30213f;color:white;outline:none;
 }
 input:focus,select:focus{border-color:#bd82ff}
 input::placeholder{color:#aa9ab9}
 .action{
- width:100%;height:47px;margin:8px 0;
- border:0;border-radius:11px;
+ width:100%;height:47px;margin:8px 0;border:0;
+ border-radius:11px;
  background:linear-gradient(90deg,#a855f7,#7c3aed);
- color:white;font-weight:bold;
- cursor:pointer;
+ color:white;font-weight:bold;cursor:pointer;
 }
 #recaptcha-container{margin:12px 0}
 #userProfile{
- display:none;text-align:center;
- padding:16px;background:#30213f;
- border-radius:14px;margin-bottom:18px;
+ display:none;text-align:center;padding:16px;
+ background:#30213f;border-radius:14px;margin-bottom:18px;
 }
 #userPhoto{
- width:65px;height:65px;
- border-radius:50%;object-fit:cover;
- border:2px solid #c084fc;
+ width:65px;height:65px;border-radius:50%;
+ object-fit:cover;border:2px solid #c084fc;
 }
 #userEmail{color:#bdaaca;font-size:13px}
 .logout{background:#49354f}
@@ -86,13 +72,12 @@ input::placeholder{color:#aa9ab9}
  border-top:1px solid #49365c;
 }
 .price{
- color:#d8a5ff;font-weight:bold;
- text-align:center;font-size:17px;
- padding:12px;
- background:#30213f;border-radius:10px;
+ color:#d8a5ff;font-weight:bold;text-align:center;
+ font-size:17px;padding:12px;background:#30213f;
+ border-radius:10px;
 }
 .note{font-size:12px;color:#a998b8;text-align:center}
-#message{color:#d5a5ff;text-align:center}
+#message{color:#d5a5ff;text-align:center;overflow-wrap:anywhere}
 </style>
 </head>
 
@@ -120,10 +105,9 @@ Continue with Facebook
 </button>
 
 <div class="divider">OR</div>
-
 <h3>📱 Phone Number Login</h3>
-<input id="phoneNumber" type="tel" placeholder="+959xxxxxxxxx">
 
+<input id="phoneNumber" type="tel" placeholder="+959xxxxxxxxx">
 <div id="recaptcha-container"></div>
 
 <button class="login-btn phone" onclick="sendOTP()">
@@ -134,7 +118,6 @@ Continue with Facebook
 placeholder="Enter 6-digit OTP">
 
 <button class="action" onclick="verifyOTP()">Verify OTP</button>
-
 <p class="note">Phone number ကို နိုင်ငံကုဒ်နဲ့ ထည့်ပါ။</p>
 </div>
 
@@ -148,9 +131,13 @@ placeholder="Enter 6-digit OTP">
 <div class="section">
 <h2>💎 Diamond Top Up</h2>
 
+<label>Player ID</label>
 <input id="playerID" placeholder="Player ID">
+
+<label>Server ID</label>
 <input id="serverID" placeholder="Server ID">
 
+<label>Select Product</label>
 <select id="product" onchange="showPrice()">
 <option value="">Select Product</option>
 <option value="7900">Weekly Pass - 7,900 MMK</option>
@@ -161,7 +148,18 @@ placeholder="Enter 6-digit OTP">
 
 <div class="price" id="price">Price: 0 MMK</div>
 
-<button class="action" onclick="demoOrder()">
+<label>Payment Method (Demo)</label>
+<select id="paymentMethod">
+<option value="">Select Payment Method</option>
+<option value="KBZPay">KBZPay</option>
+<option value="WavePay">WavePay</option>
+</select>
+
+<label>Fake Transaction ID (Demo Only)</label>
+<input id="transactionID" type="text"
+placeholder="Enter fake test ID">
+
+<button type="button" class="action" onclick="demoOrder()">
 Confirm Demo Order
 </button>
 
@@ -177,19 +175,46 @@ function showPrice(){
  "Price: "+(Number(p.value)||0).toLocaleString()+" MMK";
 }
 
-function demoOrder(){
+window.demoOrder=async function(){
  const player=document.getElementById("playerID").value.trim();
  const server=document.getElementById("serverID").value.trim();
  const product=document.getElementById("product");
+ const payment=document.getElementById("paymentMethod").value;
+ const transaction=document.getElementById("transactionID").value.trim();
+ const message=document.getElementById("message");
 
- if(!player||!server||!product.value){
+ if(!player||!server||!product.value||!payment||!transaction){
   alert("Please fill all fields!");
   return;
  }
- document.getElementById("message").textContent=
- "Demo Order: "+product.options[product.selectedIndex].text+
- " | Player: "+player+" | Server: "+server;
-}
+
+ if(typeof window.auraSaveOrder!=="function"){
+  message.textContent="Firebase is not ready. Please reload the page.";
+  return;
+ }
+
+ message.textContent="Saving demo order...";
+
+ try{
+  const order={
+   playerID:player,
+   serverID:server,
+   product:product.options[product.selectedIndex].text,
+   price:Number(product.value),
+   paymentMethod:payment,
+   transactionID:transaction,
+   status:"Pending",
+   createdAt:new Date().toISOString()
+  };
+
+  const result=await window.auraSaveOrder(order);
+  message.textContent="Demo Order Saved! ID: "+result.id;
+
+ }catch(error){
+  console.error(error);
+  message.textContent="Order Save Failed: "+error.message;
+ }
+};
 </script>
 
 <script type="module">
@@ -201,6 +226,10 @@ import {
  signInWithPopup,signOut,onAuthStateChanged,
  RecaptchaVerifier,signInWithPhoneNumber
 } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+import {
+ getFirestore,collection,addDoc
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 
 const firebaseConfig={
  apiKey:"AIzaSyDkCgqgLy2GC_kNbReVdzUnyULYnNEYjkI",
@@ -214,20 +243,32 @@ const firebaseConfig={
 
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
+const db=getFirestore(app);
 
 const googleProvider=new GoogleAuthProvider();
 const facebookProvider=new FacebookAuthProvider();
 
+window.auraSaveOrder=async(order)=>{
+ if(!auth.currentUser){
+  throw new Error("Please login first.");
+ }
+ return await addDoc(collection(db,"Orders"),order);
+};
+
 window.auraGoogleLogin=async()=>{
  try{
   await signInWithPopup(auth,googleProvider);
- }catch(e){alert("Google Login: "+e.message);}
+ }catch(e){
+  alert("Google Login: "+e.message);
+ }
 };
 
 window.auraFacebookLogin=async()=>{
  try{
   await signInWithPopup(auth,facebookProvider);
- }catch(e){alert("Facebook Login: "+e.message);}
+ }catch(e){
+  alert("Facebook Login: "+e.message);
+ }
 };
 
 let confirmationResult=null;
@@ -253,8 +294,10 @@ window.sendOTP=async()=>{
   );
 
   alert("OTP ပို့ပြီးပါပြီ။");
+
  }catch(e){
   alert("Phone Error: "+e.message);
+
   if(recaptchaVerifier){
    recaptchaVerifier.clear();
    recaptchaVerifier=null;
@@ -273,6 +316,7 @@ window.verifyOTP=async()=>{
 
   await confirmationResult.confirm(code);
   alert("Phone Login Success!");
+
  }catch(e){
   alert("OTP Error: "+e.message);
  }
@@ -281,7 +325,9 @@ window.verifyOTP=async()=>{
 window.auraLogout=async()=>{
  try{
   await signOut(auth);
- }catch(e){alert(e.message);}
+ }catch(e){
+  alert(e.message);
+ }
 };
 
 onAuthStateChanged(auth,user=>{
@@ -300,12 +346,13 @@ onAuthStateChanged(auth,user=>{
 
   document.getElementById("userPhoto").src=
    user.photoURL||"https://www.gravatar.com/avatar/?d=mp";
+
  }else{
   profile.style.display="none";
   login.style.display="block";
  }
 });
 </script>
+
 </body>
 </html>
-
