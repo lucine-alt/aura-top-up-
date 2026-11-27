@@ -18,6 +18,12 @@ a{color:inherit;text-decoration:none}
 .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:1.5px;color:#e8d2ff;font-size:19px}
 .brand-mark{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#bd65ff,#4268ff);box-shadow:0 0 22px #8b5cf677;font-size:20px}
 .top-actions{display:flex;align-items:center;gap:9px}
+.search-toggle{width:40px;height:40px;border:1px solid #7655a0;border-radius:12px;background:linear-gradient(135deg,#30204d,#18284a);color:#fff;font-size:20px;display:grid;place-items:center;box-shadow:0 0 16px #8b5cf733}
+.search-row{display:none;max-width:1180px;margin:0 auto;padding:0 18px 12px;gap:8px}
+.search-row.show{display:flex}
+.search-row input{flex:1;min-width:0;padding:12px 14px;border:1px solid #7655a0;border-radius:12px;background:#171329;color:#fff;outline:none}
+.search-row input:focus{border-color:#54d8ff;box-shadow:0 0 0 2px #54d8ff22}
+.search-row button{width:44px;border:1px solid #51416f;border-radius:12px;background:#29223e;color:#fff;font-size:18px}
 .lang-select{background:#201a37;color:white;border:1px solid #65508c;border-radius:10px;padding:9px 10px;max-width:145px}
 .login-mini{background:linear-gradient(100deg,#9d4edd,#5b55db);border:0;color:white;border-radius:10px;padding:10px 14px;font-weight:700}
 .wrap{max-width:1180px;margin:auto;padding:24px 18px 60px}
@@ -97,7 +103,7 @@ a{color:inherit;text-decoration:none}
 .modal-head{display:flex;justify-content:space-between;align-items:center}
 .close{background:#302644;border:0;color:white;border-radius:8px;padding:7px 10px}
 @media(max-width:850px){.catalog{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:600px){.wrap{padding:16px 12px 40px}.top-inner{padding:10px 12px}.brand{font-size:15px}.hero{padding:25px 19px}.catalog{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.item-image{height:115px}.store-layout{grid-template-columns:1fr}.section-head h2{font-size:19px}.stats{gap:7px}.stat{padding:9px}.stat strong{font-size:16px}.login-buttons{grid-template-columns:1fr}.lang-select{max-width:125px;padding:8px 6px}}
+@media(max-width:600px){.wrap{padding:16px 12px 40px}.top-inner{padding:10px 12px}.brand{font-size:15px}.hero{padding:25px 19px}.catalog{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.item-image{height:115px}.store-layout{grid-template-columns:1fr}.section-head h2{font-size:19px}.stats{gap:7px}.stat{padding:9px}.stat strong{font-size:16px}.login-buttons{grid-template-columns:1fr}.lang-select{max-width:125px;padding:8px 6px}.search-row{padding:0 12px 10px}.search-toggle{width:38px;height:38px}}
 </style>
 </head>
 <body>
@@ -105,11 +111,16 @@ a{color:inherit;text-decoration:none}
  <div class="top-inner">
   <a class="brand" href="#home"><span class="brand-mark">✦</span><span>AURA TOP UP</span></a>
   <div class="top-actions">
+   <button class="search-toggle" id="searchToggle" type="button" aria-label="Search" onclick="toggleSearch()" title="Search">🔍</button>
    <select class="lang-select" id="language" aria-label="Language" onchange="setLanguage(this.value)">
     <option value="my">🇲🇲 မြန်မာ</option><option value="en">🇬🇧 English</option><option value="zh">🇨🇳 中文</option>
    </select>
    <button class="login-mini" onclick="document.getElementById('account').scrollIntoView({behavior:'smooth'})" data-i18n="account">Account</button>
   </div>
+ </div>
+ <div class="search-row" id="searchRow">
+  <input id="siteSearch" type="search" placeholder="Game / App ရှာရန်..." oninput="searchCatalog(this.value)" autocomplete="off">
+  <button type="button" onclick="clearSearch()" aria-label="Clear search">✕</button>
  </div>
 </header>
 
@@ -282,7 +293,11 @@ let currentLang='my',selectedPrice='',selectedProductName='',currentGameFilter='
 function t(key){return (translations[currentLang]&&translations[currentLang][key])||translations.my[key]||key}
 function setLanguage(lang){currentLang=lang;document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(translations[lang][key]){const strong=el.querySelector('strong');if(strong){const value=strong.textContent;el.firstChild.textContent=translations[lang][key];strong.textContent=value}else el.innerHTML=translations[lang][key]}});renderCatalog('games');renderCatalog('apps')}
 function cardHTML(item){const available=item.status==='available';return `<article class="item-card"><div class="item-image"><img src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'"><span class="item-icon">${item.icon}</span></div><div class="item-body"><h3>${item.name}</h3><p>${item.desc}</p><div class="item-foot"><span class="status ${available?'':'soon'}">${available?t('available'):t('coming')}</span><button class="small-btn" onclick="${item.action==='topup'?"goTopup()":`showSoon('${item.name.replace(/'/g,"")}')`}">${available?t('topupNow'):t('close')}</button></div></div></article>`}
-function renderCatalog(type){const items=type==='games'?gameItems:appItems;const filter=type==='games'?currentGameFilter:currentAppFilter;const el=document.getElementById(type==='games'?'gamesCatalog':'appsCatalog');el.innerHTML=items.filter(x=>filter==='all'||(filter==='available'?x.status==='available':x.status==='soon')).map(cardHTML).join('')}
+let catalogSearch='';
+function toggleSearch(){const row=document.getElementById('searchRow');row.classList.toggle('show');if(row.classList.contains('show'))document.getElementById('siteSearch').focus();else clearSearch()}
+function clearSearch(){catalogSearch='';const input=document.getElementById('siteSearch');if(input)input.value='';renderCatalog('games');renderCatalog('apps')}
+function searchCatalog(value){catalogSearch=String(value||'').trim().toLowerCase();renderCatalog('games');renderCatalog('apps')}
+function renderCatalog(type){const items=type==='games'?gameItems:appItems;const filter=type==='games'?currentGameFilter:currentAppFilter;const el=document.getElementById(type==='games'?'gamesCatalog':'appsCatalog');el.innerHTML=items.filter(x=>(filter==='all'||(filter==='available'?x.status==='available':x.status==='soon'))&&(!catalogSearch||[x.name,x.desc].join(' ').toLowerCase().includes(catalogSearch))).map(cardHTML).join('');if(!el.innerHTML&&catalogSearch)el.innerHTML='<p class="notice">မတွေ့ပါ။ နာမည်ပြန်စစ်ပါ။</p>'}
 function filterCatalog(filter,type,button){if(type==='games')currentGameFilter=filter;else currentAppFilter=filter;button.parentElement.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));button.classList.add('active');renderCatalog(type)}
 function goTopup(){document.getElementById('topup').scrollIntoView({behavior:'smooth'})}
 function showSoon(name){document.getElementById('soonTitle').textContent=name+' • '+t('coming');document.getElementById('soonText').textContent=t('soonText');document.getElementById('soonModal').classList.add('show')}
