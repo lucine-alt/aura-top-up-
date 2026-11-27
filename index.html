@@ -249,7 +249,8 @@ const firebaseConfig={
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
-
+window.auraFirebaseReady = true;
+console.log("AURA Firebase Ready");
 const googleProvider=new GoogleAuthProvider();
 const facebookProvider=new FacebookAuthProvider();
 
