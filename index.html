@@ -187,6 +187,13 @@ Load Admin Orders
 </button>
 <h2>✦ AURA ADMIN</h2>
 <h3>Customer Orders</h3>
+
+<div class="order-filters">
+  <button onclick="filterOrders('All')">All Orders</button>
+  <button onclick="filterOrders('Pending')">Pending</button>
+  <button onclick="filterOrders('Completed')">Completed</button>
+</div>
+
 <div id="ordersList">Loading Orders...</div>
 </div>
 
@@ -294,7 +301,19 @@ window.auraLoadAdminOrders=async()=>{
   alert("Admin access only!");
   return;
  }
+window.filterOrders = function(status) {
+  const items = document.querySelectorAll(".order-item");
 
+  items.forEach(item => {
+    const orderStatus = item.textContent;
+
+    if (status === "All" || orderStatus.includes("Status: " + status)) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  });
+};
  const dashboard=document.getElementById("adminDashboard");
  const list=document.getElementById("ordersList");
 
