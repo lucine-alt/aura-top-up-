@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090817">
+<title>AURA TOP UP</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#090817;
+ color:#fff;
+}
+header{
+ padding:20px;
+ background:#111027;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ border-bottom:1px solid #29244c;
+}
+.logo{
+ font-size:22px;
+ font-weight:bold;
+ color:#a78bfa;
+ letter-spacing:2px;
+}
+button{
+ border:0;
+ border-radius:10px;
+ padding:12px 16px;
+ background:#8b5cf6;
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+}
+button:active{opacity:.8}
+.container{
+ max-width:900px;
+ margin:auto;
+ padding:18px;
+}
+.hero{
+ text-align:center;
+ padding:35px 15px;
+ background:linear-gradient(135deg,#21134a,#111027);
+ border:1px solid #393064;
+ border-radius:18px;
+ margin:18px 0;
+}
+.hero h1{
+ color:#c4b5fd;
+ font-size:32px;
+ margin:5px;
+}
+.hero p{color:#bbb}
+.section-title{
+ color:#c4b5fd;
+ margin-top:28px;
+}
+.games,.packages{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+.card{
+ background:#15132b;
+ border:1px solid #302952;
+ padding:16px;
+ border-radius:14px;
+ cursor:pointer;
+}
+.card.selected{
+ border:2px solid #a78bfa;
+ background:#241b46;
+}
+.game-icon{
+ font-size:30px;
+ margin-bottom:8px;
+}
+.card h3{margin:5px 0}
+.card p{color:#aaa;font-size:13px}
+.price{
+ color:#c4b5fd;
+ font-weight:bold;
+ font-size:18px;
+}
+form,.panel{
+ background:#15132b;
+ border:1px solid #302952;
+ border-radius:15px;
+ padding:18px;
+ margin-top:15px;
+}
+label{
+ display:block;
+ margin:13px 0 7px;
+ color:#ccc;
+}
+input,select{
+ width:100%;
+ padding:13px;
+ border-radius:9px;
+ border:1px solid #39345a;
+ background:#0c0b1b;
+ color:white;
+ outline:none;
+}
+.full{width:100%;margin-top:15px}
+.notice{
+ color:#b9a9e9;
+ font-size:12px;
+ line-height:1.6;
+}
+.hidden{display:none}
+.order{
+ background:#211b3d;
+ border-radius:10px;
+ padding:13px;
+ margin:10px 0;
+ font-size:13px;
+ line-height:1.8;
+}
+footer{
+ text-align:center;
+ color:#777;
+ padding:30px 10px;
+ font-size:12px;
+}
+hr{border-color:#302952}
+@media(min-width:600px){
+ .games{grid-template-columns:repeat(3,1fr)}
+ .packages{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">AURA TOP UP</div>
+ <button onclick="login()">Google Login</button>
+</header>
+
+<div class="container">
+
+<section class="hero">
+ <h1>AURA TOP UP</h1>
+ <p>Game Top Up Demo Store</p>
+ <p>Fast • Easy • Secure</p>
+</section>
+
+<h3 class="section-title">🎮 Select Game</h3>
+
+<div class="games">
+ <div class="card selected" onclick="selectGame('Mobile Legends',this)">
+  <div class="game-icon">⚔️</div>
+  <h3>Mobile Legends</h3>
+  <p>MLBB Diamonds</p>
+ </div>
+
+ <div class="card" onclick="selectGame('Clash of Clans',this)">
+  <div class="game-icon">🏰</div>
+  <h3>Clash of Clans</h3>
+  <p>COC Gems</p>
+ </div>
+
+ <div class="card" onclick="selectGame('Other Games',this)">
+  <div class="game-icon">🎮</div>
+  <h3>Other Games</h3>
+  <p>Coming Soon</p>
+ </div>
+</div>
+
+<h3 class="section-title">💎 Select Package</h3>
+
+<div class="packages">
+ <div class="card" onclick="selectPackage('Weekly Diamond Pass',7900,this)">
+  <h3>Weekly Pass</h3>
+  <p>Mobile Legends</p>
+  <div class="price">7,900 MMK</div>
+ </div>
+
+ <div class="card" onclick="selectPackage('86 Diamonds',2550,this)">
+  <h3>86 Diamonds</h3>
+  <p>Mobile Legends</p>
+  <div class="price">2,550 MMK</div>
+ </div>
+
+ <div class="card" onclick="selectPackage('172 Diamonds',4800,this)">
+  <h3>172 Diamonds</h3>
+  <p>Mobile Legends</p>
+  <div class="price">4,800 MMK</div>
+ </div>
+
+ <div class="card" onclick="selectPackage('257 Diamonds',8000,this)">
+  <h3>257 Diamonds</h3>
+  <p>Mobile Legends</p>
+  <div class="price">8,000 MMK</div>
+ </div>
+</div>
+
+<h3 class="section-title">📝 Order Information</h3>
+
+<form onsubmit="submitOrder(event)">
+ <label>Game Name</label>
+ <input id="game" value="Mobile Legends" readonly>
+
+ <label>Package</label>
+ <input id="package" placeholder="Select package" readonly required>
+
+ <label>Price (MMK)</label>
+ <input id="price" placeholder="Package price" readonly>
+
+ <label>Player ID</label>
+ <input id="playerId" placeholder="Enter Player ID" required>
+
+ <label>Server ID</label>
+ <input id="serverId" placeholder="Enter Server ID">
+
+ <label>Payment Method (Demo)</label>
+ <select id="payment" required>
+  <option value="">Select Payment</option>
+  <option value="KBZPay">KBZPay</option>
+  <option value="WavePay">WavePay</option>
+ </select>
+
+ <button class="full" type="submit">Confirm Demo Order</button>
+ <p class="notice">
+  သတိပြုရန် - ဤ Website သည် Demo ဖြစ်သည်။
+  တကယ့်ငွေပေးချေမှု မပြုလုပ်ပါနှင့်။
+  PIN၊ OTP၊ Password များ မထည့်ပါနှင့်။
+ </p>
+</form>
+
+<div class="panel">
+ <h3>👤 My Account</h3>
+ <p id="userInfo">Not logged in</p>
+ <button onclick="login()">Google Login</button>
+ <button onclick="logout()" style="background:#51466d">Logout</button>
+</div>
+
+<div class="panel">
+ <h3>📦 My Orders</h3>
+ <button onclick="loadMyOrders()">Load My Orders</button>
+ <div id="myOrders"></div>
+</div>
+
+<div id="adminDashboard" class="panel hidden">
+ <h3>⚙️ Admin Dashboard</h3>
+ <button onclick="loadAdminOrders()">Load Admin Orders</button>
+ <div id="ordersList"></div>
+</div>
+
+</div>
+
+<footer>
+ AURA TOP UP © 2026<br>
+ Demo Store • All Rights Reserved
+</footer>
+
+<script type="module">
+import { initializeApp }
+ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+ getAuth,
+ GoogleAuthProvider,
+ signInWithPopup,
+ signOut,
+ onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+ getFirestore,
+ collection,
+ addDoc,
+ getDocs,
+ query,
+ where,
+ orderBy,
+ serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyDkCgqgLy2GC_kNbReVdzUnyULYnNEYjkI",
+ authDomain: "aura-top-up-fd609.firebaseapp.com",
+ projectId: "aura-top-up-fd609",
+ storageBucket: "aura-top-up-fd609.firebasestorage.app",
+ messagingSenderId: "822916904997",
+ appId: "1:822916904997:web:c6de6a6ace7059f6e527cc",
+ measurementId: "G-F1JJT3P1VQ"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+const adminEmail = "ak0061266@gmail.com";
+
+let selectedGame = "Mobile Legends";
+let selectedPackage = "";
+let selectedPrice = 0;
+
+window.selectGame = (name,element) => {
+ selectedGame = name;
+ document.getElementById("game").value = name;
+
+ document.querySelectorAll(".games .card")
+ .forEach(card=>card.classList.remove("selected"));
+
+ element.classList.add("selected");
+};
+
+window.selectPackage = (name,price,element) => {
+ selectedPackage = name;
+ selectedPrice = price;
+
+ document.getElementById("package").value = name;
+ document.getElementById("price").value =
+ price.toLocaleString("en-US") + " MMK";
+
+ document.querySelectorAll(".packages .card")
+ .forEach(card=>card.classList.remove("selected"));
+
+ element.classList.add("selected");
+};
+
+window.login = async () => {
+ try {
+  await signInWithPopup(auth,provider);
+ } catch(error) {
+  alert("Login Error: " + error.message);
+ }
+};
+
+window.logout = async () => {
+ try {
+  await signOut(auth);
+  alert("Logged out");
+ } catch(error) {
+  alert(error.message);
+ }
+};
+
+onAuthStateChanged(auth,user=>{
+ const info = document.getElementById("userInfo");
+ const dashboard = document.getElementById("adminDashboard");
+
+ if(user){
+  info.textContent = user.email;
+  dashboard.classList.toggle(
+   "hidden",
+   user.email !== adminEmail
+  );
+ }else{
+  info.textContent = "Not logged in";
+  dashboard.classList.add("hidden");
+ }
+});
+
+window.submitOrder = async (event) => {
+ event.preventDefault();
+
+ const user = auth.currentUser;
+
+ if(!user){
+  alert("Please login with Google first.");
+  return;
+ }
+
+ if(!selectedPackage || !selectedPrice){
+  alert("Please select a package.");
+  return;
+ }
+
+ if(selectedGame !== "Mobile Legends"){
+  alert("This game is not available yet.");
+  return;
+ }
+
+ const playerId = document.getElementById("playerId").value.trim();
+ const serverId = document.getElementById("serverId").value.trim();
+ const paymentMethod = document.getElementById("payment").value;
+
+ if(!playerId || !paymentMethod){
+  alert("Please complete the required fields.");
+  return;
+ }
+
+ try{
+  await addDoc(collection(db,"Orders"),{
+   uid:user.uid,
+   email:user.email,
+   game:selectedGame,
+   product:selectedPackage,
+   price:selectedPrice,
+   playerId:playerId,
+   serverId:serverId,
+   paymentMethod:paymentMethod,
+   isDemo:true,
+   status:"Pending",
+   createdAt:serverTimestamp()
+  });
+
+  alert("Demo Order Submitted!");
+  event.target.reset();
+
+  document.getElementById("game").value = selectedGame;
+  document.getElementById("package").value = "";
+  document.getElementById("price").value = "";
+  selectedPackage = "";
+  selectedPrice = 0;
+
+ }catch(error){
+  alert("Order Error: " + error.message);
+ }
+};
+
+window.loadMyOrders = async () => {
+ const user = auth.currentUser;
+ const output = document.getElementById("myOrders");
+
+ if(!user){
+  alert("Please login first.");
+  return;
+ }
+
+ output.textContent = "Loading...";
+
+ try{
+  const q = query(
+   collection(db,"Orders"),
+   where("uid","==",user.uid)
+  );
+
+  const snapshot = await getDocs(q);
+  output.innerHTML = "";
+
+  if(snapshot.empty){
+   output.textContent = "No orders yet.";
+   return;
+  }
+
+  snapshot.forEach(doc=>{
+   const data = doc.data();
+   const item = document.createElement("div");
+   item.className = "order";
+
+   item.textContent =
+    data.product + " | " +
+    data.price + " MMK | Status: " +
+    data.status;
+
+   output.appendChild(item);
+  });
+
+ }catch(error){
+  output.textContent = "Error: " + error.message;
+ }
+};
+
+window.loadAdminOrders = async () => {
+ const user = auth.currentUser;
+ const output = document.getElementById("ordersList");
+
+ if(!user || user.email !== adminEmail){
+  alert("Admin access only!");
+  return;
+ }
+
+ output.textContent = "Loading...";
+
+ try{
+  const q = query(
+   collection(db,"Orders"),
+   orderBy("createdAt","desc")
+  );
+
+  const snapshot = await getDocs(q);
+  output.innerHTML = "";
+
+  if(snapshot.empty){
+   output.textContent = "No orders found.";
+   return;
+  }
+
+  snapshot.forEach(doc=>{
+   const data = doc.data();
+   const item = document.createElement("div");
+   item.className = "order";
+
+   item.textContent =
+    "Email: " + data.email +
+    " | Game: " + data.game +
+    " | Package: " + data.product +
+    " | Price: " + data.price +
+    " | Player ID: " + data.playerId +
+    " | Payment: " + data.paymentMethod +
+    " | Status: " + data.status;
+
+   output.appendChild(item);
+  });
+
+ }catch(error){
+  output.textContent = "Admin Error: " + error.message;
+ }
+};
+</script>
+
+</body>
+</html>
