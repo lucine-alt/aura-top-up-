@@ -9,462 +9,367 @@
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;
-background:#10001f;
-color:#fff;
-font-family:Arial,"Noto Sans Myanmar",sans-serif;
-padding-bottom:30px;
+ margin:0;
+ background:#10001f;
+ color:white;
+ font-family:Arial,sans-serif;
+ padding-bottom:30px;
 }
 button,input{font:inherit}
 button{cursor:pointer}
 
-:root{
---purple:#a000ff;
---pink:#e040ff;
---dark:#160027;
---border:#7620bd;
---light:#d9a4ff;
-}
-
 .hero{
-min-height:270px;
-padding:35px 20px 25px;
-background:
-linear-gradient(90deg,#10001de8,#25004488),
-radial-gradient(circle at 75% 30%,#a000ff99,transparent 45%);
-position:relative;
-overflow:hidden;
-border-bottom:2px solid #8121d7;
+ padding:35px 20px;
+ min-height:240px;
+ background:radial-gradient(circle at 75% 30%,#a000ff99,transparent 50%),#160027;
+ border-bottom:2px solid #8121d7;
 }
-.hero:after{
-content:"✦";
-position:absolute;
-right:25px;
-top:20px;
-font-size:180px;
-color:#b34aff22;
-}
-.hero-content{position:relative;z-index:2}
 .logo-title{
-font-size:clamp(38px,9vw,65px);
-font-weight:1000;
-font-style:italic;
-color:#fff;
-text-shadow:0 0 8px #a000ff,0 0 25px #a000ff;
-line-height:1;
+ font-size:55px;
+ font-weight:1000;
+ font-style:italic;
+ text-shadow:0 0 20px #a000ff;
 }
 .logo-sub{
-font-size:clamp(29px,7vw,48px);
-font-weight:1000;
-font-style:italic;
-color:#e9baff;
-text-shadow:0 0 15px #a000ff;
-margin-top:5px;
+ font-size:40px;
+ font-weight:1000;
+ color:#e9baff;
+ text-shadow:0 0 15px #a000ff;
 }
 .hero-line{
-width:max-content;
-max-width:100%;
-background:#220039bb;
-padding:8px 12px;
-margin-top:14px;
-font-weight:bold;
-font-size:13px;
+ display:inline-block;
+ background:#30004c;
+ padding:8px 12px;
+ margin-top:12px;
+ font-weight:bold;
 }
 .hero-tag{
-margin-top:13px;
-color:#f5caff;
-font-size:17px;
-font-style:italic;
+ margin-top:12px;
+ color:#f5caff;
 }
-.hero-symbol{
-position:absolute;
-right:12px;
-bottom:10px;
-font-size:95px;
-opacity:.75;
-filter:drop-shadow(0 0 20px #b000ff);
-}
-
 .container{
-width:100%;
-max-width:1050px;
-margin:auto;
-padding:0 13px;
+ max-width:1050px;
+ margin:auto;
+ padding:0 13px;
 }
-
 .panel{
-background:linear-gradient(145deg,#1b0034,#10001f);
-border:1px solid #7620bd;
-border-radius:25px;
-box-shadow:0 0 20px #7900c744;
-padding:15px;
-margin:12px 0;
+ background:linear-gradient(145deg,#1b0034,#10001f);
+ border:1px solid #7620bd;
+ border-radius:20px;
+ padding:15px;
+ margin:13px 0;
+ box-shadow:0 0 15px #7900c744;
 }
-
 .panel-title{
-display:flex;
-align-items:center;
-gap:10px;
-font-size:23px;
-font-weight:900;
-margin:0 0 15px;
-text-shadow:0 0 10px #a000ff;
+ font-size:23px;
+ font-weight:bold;
+ margin:0 0 15px;
 }
-.diamond-icon{font-size:30px}
-
 .package-grid{
-display:grid;
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:12px;
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:10px;
 }
-
 .package{
-min-width:0;
-min-height:175px;
-padding:12px 5px 8px;
-background:linear-gradient(145deg,#21003d,#10001e);
-border:1px solid #8c27d5;
-border-radius:19px;
-color:#fff;
-text-align:center;
-box-shadow:0 0 12px #a000ff55;
-transition:.2s;
+ min-width:0;
+ min-height:150px;
+ padding:10px 4px;
+ background:linear-gradient(145deg,#290047,#10001e);
+ border:1px solid #8c27d5;
+ border-radius:17px;
+ color:white;
+ text-align:center;
 }
 .package.selected{
-border:2px solid #efb4ff;
-box-shadow:0 0 22px #bd36ff;
-transform:translateY(-2px);
+ border:2px solid #efb4ff;
+ box-shadow:0 0 20px #bd36ff;
 }
-.package-name{
-font-size:clamp(12px,3vw,17px);
-font-weight:bold;
-}
+.package-name{font-weight:bold;font-size:14px}
 .package-art{
-height:90px;
-display:grid;
-place-items:center;
-font-size:55px;
-text-shadow:0 0 18px #168cff;
+ height:75px;
+ display:grid;
+ place-items:center;
+ font-size:45px;
 }
 .package-price{
-background:linear-gradient(90deg,#8500d9,#c000ff);
-border-radius:20px;
-padding:8px 3px;
-font-size:clamp(13px,3vw,18px);
-font-weight:900;
-box-shadow:0 0 12px #a000ff;
+ background:linear-gradient(90deg,#8500d9,#c000ff);
+ border-radius:20px;
+ padding:8px 2px;
+ font-weight:bold;
+ font-size:14px;
 }
-
 .order-layout{
-display:grid;
-grid-template-columns:minmax(0,1fr) 205px;
-gap:12px;
+ display:grid;
+ grid-template-columns:minmax(0,1fr) 190px;
+ gap:12px;
 }
 .order-box{
-background:#130020;
-border:1px solid #7620bd;
-border-radius:22px;
-padding:14px;
-box-shadow:0 0 16px #8b00d744;
+ background:#130020;
+ border:1px solid #7620bd;
+ border-radius:20px;
+ padding:14px;
 }
-.order-title{
-font-size:23px;
-font-weight:bold;
-margin-bottom:15px;
-}
+.order-title{font-size:22px;margin:0 0 15px}
 .form-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
 }
 .field label{
-display:block;
-font-weight:bold;
-margin-bottom:8px;
-font-size:14px;
+ display:block;
+ font-weight:bold;
+ margin-bottom:7px;
 }
 .field input{
-width:100%;
-min-width:0;
-background:#1d0730;
-color:white;
-border:1px solid #7635ad;
-border-radius:12px;
-padding:14px 12px;
-outline:none;
+ width:100%;
+ min-width:0;
+ background:#1d0730;
+ color:white;
+ border:1px solid #7635ad;
+ border-radius:10px;
+ padding:13px 10px;
+ outline:none;
 }
-.field input:focus{
-border-color:#dc8aff;
-box-shadow:0 0 10px #a000ff88;
-}
+.field input:focus{border-color:#dc8aff}
 .field input::placeholder{color:#a98abf}
-
 .payment-row{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:9px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:8px;
 }
 .pay-button{
-border:1px solid #8a43cb;
-border-radius:12px;
-padding:13px 5px;
-font-weight:900;
-font-size:17px;
+ border:1px solid #8a43cb;
+ border-radius:10px;
+ padding:12px 4px;
+ font-weight:bold;
 }
 .kpay{background:#0862d9;color:white}
 .wave{background:#ffdc00;color:#111}
 .pay-button.selected{
-outline:3px solid #d99aff;
-box-shadow:0 0 15px #a000ff;
+ outline:3px solid #d99aff;
 }
-
 .confirm-button{
-width:100%;
-border:1px solid #e5a4ff;
-border-radius:18px;
-padding:17px 8px;
-margin-top:17px;
-background:linear-gradient(100deg,#8b00ed,#d000ff,#7200e8);
-color:white;
-font-size:21px;
-font-weight:1000;
-box-shadow:0 0 18px #a000ff99;
+ width:100%;
+ border:1px solid #e5a4ff;
+ border-radius:14px;
+ padding:15px 8px;
+ margin-top:15px;
+ background:linear-gradient(100deg,#8b00ed,#d000ff);
+ color:white;
+ font-size:18px;
+ font-weight:bold;
 }
-.confirm-button:active{transform:scale(.98)}
-
 .benefits{
-background:linear-gradient(160deg,#250044,#10001f);
-border:1px solid #7620bd;
-border-radius:20px;
-padding:15px 10px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-gap:22px;
+ background:#200038;
+ border:1px solid #7620bd;
+ border-radius:18px;
+ padding:15px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ gap:22px;
 }
-.benefit{
-display:flex;
-align-items:center;
-gap:10px;
-font-size:14px;
-font-weight:bold;
-}
-.benefit-icon{
-font-size:32px;
-color:#dca0ff;
-text-shadow:0 0 15px #a000ff;
-}
+.benefit{font-weight:bold;font-size:14px}
+.benefit-icon{font-size:28px;color:#dca0ff}
 .benefit-note{
-border-top:1px solid #7726ad;
-padding-top:17px;
-text-align:center;
-color:#e7a4ff;
-font-size:21px;
-font-style:italic;
+ border-top:1px solid #7726ad;
+ padding-top:15px;
+ text-align:center;
+ color:#e7a4ff;
+ font-size:20px;
 }
-
 .notice{
-background:#2b1240;
-border:1px solid #8242b2;
-border-radius:10px;
-padding:11px;
-margin-top:12px;
-color:#f1cfff;
-font-size:12px;
-line-height:1.6;
+ background:#2b1240;
+ border:1px solid #8242b2;
+ border-radius:10px;
+ padding:11px;
+ margin-top:12px;
+ color:#f1cfff;
+ font-size:13px;
+ line-height:1.6;
+ overflow-wrap:anywhere;
 }
 .message{font-size:13px;color:#e5baff;margin-top:10px}
-
-@media(max-width:650px){
-.hero{min-height:235px;padding:28px 15px}
-.order-layout{grid-template-columns:1fr}
-.benefits{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:15px;
+footer{
+ text-align:center;
+ padding:20px;
+ color:#bd91d7;
 }
-.benefit-note{grid-column:1/-1}
-.package-grid{gap:7px}
-.package{min-height:145px;padding:9px 3px 7px}
-.package-art{height:75px;font-size:43px}
-.panel{padding:11px}
+.order-card{
+ background:#2b1240;
+ border:1px solid #8242b2;
+ border-radius:10px;
+ padding:12px;
+ margin-top:10px;
+ overflow-wrap:anywhere;
+}
+@media(max-width:650px){
+ .hero{padding:28px 15px}
+ .order-layout{grid-template-columns:1fr}
+ .benefits{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+ }
+ .benefit-note{grid-column:1/-1}
+ .package-grid{gap:7px}
+ .package{min-height:140px}
+ .panel{padding:11px}
 }
 @media(max-width:370px){
-.form-grid{grid-template-columns:1fr}
-.package-name{font-size:11px}
-.package-price{font-size:12px}
+ .form-grid{grid-template-columns:1fr}
+ .package-name{font-size:11px}
+ .package-price{font-size:12px}
 }
 </style>
 </head>
+
 <body>
 
 <header class="hero">
-<div class="hero-content">
  <div class="logo-title">✦ AURA</div>
  <div class="logo-sub">TOP UP</div>
  <div class="hero-line">MOBILE LEGENDS • DIAMOND STORE</div>
  <div class="hero-tag">Top Up Easy • Fast • Safe</div>
-</div>
-<div class="hero-symbol">💎</div>
 </header>
 
 <main class="container">
 
-<!-- DIAMOND PACKAGES -->
 <section class="panel">
-<h2 class="panel-title">
- <span class="diamond-icon">💎</span>
- Diamond Top Up
-</h2>
+ <h2 class="panel-title">💎 Diamond Top Up</h2>
 
-<div class="package-grid">
+ <div class="package-grid">
 
- <button class="package" onclick="selectPackage('86 Diamonds',2550,this)">
- <div class="package-name">💎 86 Diamonds</div>
- <div class="package-art">💎</div>
- <div class="package-price">2,550 MMK</div>
- </button>
+  <button class="package"
+   onclick="selectPackage('86 Diamonds',2550,this)">
+   <div class="package-name">💎 86 Diamonds</div>
+   <div class="package-art">💎</div>
+   <div class="package-price">2,550 MMK</div>
+  </button>
 
- <button class="package" onclick="selectPackage('172 Diamonds',4800,this)">
- <div class="package-name">💎 172 Diamonds</div>
- <div class="package-art">💎💎</div>
- <div class="package-price">4,800 MMK</div>
- </button>
+  <button class="package"
+   onclick="selectPackage('172 Diamonds',4800,this)">
+   <div class="package-name">💎 172 Diamonds</div>
+   <div class="package-art">💎💎</div>
+   <div class="package-price">4,800 MMK</div>
+  </button>
 
- <button class="package" onclick="selectPackage('257 Diamonds',8000,this)">
- <div class="package-name">💎 257 Diamonds</div>
- <div class="package-art">💎💎</div>
- <div class="package-price">8,000 MMK</div>
- </button>
+  <button class="package"
+   onclick="selectPackage('257 Diamonds',8000,this)">
+   <div class="package-name">💎 257 Diamonds</div>
+   <div class="package-art">💎💎</div>
+   <div class="package-price">8,000 MMK</div>
+  </button>
 
- <button class="package" onclick="selectPackage('514 Diamonds',16000,this)">
- <div class="package-name">💎 514 Diamonds</div>
- <div class="package-art">💎💎💎</div>
- <div class="package-price">16,000 MMK</div>
- </button>
-
- <button class="package" onclick="selectPackage('1050 Diamonds',29500,this)">
- <div class="package-name">💎 1050 Diamonds</div>
- <div class="package-art">💎💎💎</div>
- <div class="package-price">29,500 MMK</div>
- </button>
-
- <button class="package" onclick="selectPackage('2260 Diamonds',59000,this)">
- <div class="package-name">💎 2260 Diamonds</div>
- <div class="package-art">👑💎</div>
- <div class="package-price">59,000 MMK</div>
- </button>
-
-</div>
-<div class="notice">
- ⚠️ Demo prices only. No real payment or diamond delivery.
-</div>
-</section>
-
-<!-- ORDER FORM -->
-<section class="order-layout">
-
-<div class="order-box">
- <h2 class="order-title">📋 Your Order</h2>
-
- <div class="form-grid">
-
- <div class="field">
- <label>Player ID</label>
- <input id="playerID" type="text"
- placeholder="Enter Player ID">
- </div>
-
- <div class="field">
- <label>Server ID</label>
- <input id="serverID" type="text"
- placeholder="Enter Server ID">
- </div>
-
- <div class="field">
- <label>Payment Method</label>
- <div class="payment-row">
- <button type="button"
- class="pay-button kpay"
- onclick="selectPayment('KBZPay',this)">
- KPay
- </button>
-
- <button type="button"
- class="pay-button wave"
- onclick="selectPayment('WavePay',this)">
- WavePay
- </button>
- </div>
- </div>
-
- <div class="field">
- <label>Transaction ID</label>
- <input id="transactionID" type="text"
- placeholder="DEMO Reference ID">
- </div>
+  <button class="package"
+   onclick="selectPackage('Weekly Diamond Pass',7900,this)">
+   <div class="package-name">👑 Weekly Pass</div>
+   <div class="package-art">👑💎</div>
+   <div class="package-price">7,900 MMK</div>
+  </button>
 
  </div>
-
- <div id="selectedPackage" class="notice">
- Select your Diamond Package first.
- </div>
-
- <button class="confirm-button"
- onclick="confirmOrder()">
- ➤ Confirm Demo Order
- </button>
-
- <div id="orderMessage" class="message"></div>
 
  <div class="notice">
- DEMO ONLY — ငွေလွှဲရန် မလိုပါ။ Payment PIN၊ OTP မထည့်ပါနှင့်။
- တကယ့် Diamond ပို့ဆောင်မှု မရှိပါ။
+  DEMO ONLY — ဈေးနှုန်းများသည် စမ်းသပ်ရန်သာဖြစ်သည်။
  </div>
-</div>
+</section>
 
-<!-- BENEFITS -->
-<aside class="benefits">
+<section class="order-layout">
 
- <div class="benefit">
- <span class="benefit-icon">ϟ</span>
- <span>Instant<br>Delivery</span>
+ <div class="order-box">
+  <h2 class="order-title">📋 Your Order</h2>
+
+  <div class="form-grid">
+
+   <div class="field">
+    <label>Player ID</label>
+    <input id="playerID" placeholder="Player ID">
+   </div>
+
+   <div class="field">
+    <label>Server ID</label>
+    <input id="serverID" placeholder="Server ID">
+   </div>
+
+   <div class="field">
+    <label>Payment Method</label>
+    <div class="payment-row">
+     <button type="button"
+      class="pay-button kpay"
+      onclick="selectPayment('KBZPay',this)">
+      KPay
+     </button>
+
+     <button type="button"
+      class="pay-button wave"
+      onclick="selectPayment('WavePay',this)">
+      WavePay
+     </button>
+    </div>
+   </div>
+
+   <div class="field">
+    <label>Transaction ID</label>
+    <input id="transactionID"
+     placeholder="DEMO Reference ID">
+   </div>
+
+  </div>
+
+  <div id="selectedPackage" class="notice">
+   Select your Diamond Package first.
+  </div>
+
+  <button class="confirm-button" onclick="confirmOrder()">
+   ➤ Confirm Demo Order
+  </button>
+
+  <div id="orderMessage" class="message"></div>
+
+  <div class="notice">
+   DEMO ONLY — ငွေလွှဲရန်မလိုပါ။ PIN၊ OTP မထည့်ပါနှင့်။
+   တကယ့် Diamond ပို့ဆောင်မှု မရှိပါ။
+  </div>
  </div>
 
- <div class="benefit">
- <span class="benefit-icon">♢</span>
- <span>Safe<br>& Secure</span>
- </div>
-
- <div class="benefit">
- <span class="benefit-icon">☏</span>
- <span>24/7<br>Support</span>
- </div>
-
- <div class="benefit-note">
- Play More<br>with AURA ♥
- </div>
-
-</aside>
+ <aside class="benefits">
+  <div class="benefit">
+   <span class="benefit-icon">⚡</span>
+   Instant<br>Delivery
+  </div>
+  <div class="benefit">
+   <span class="benefit-icon">♢</span>
+   Safe & Secure
+  </div>
+  <div class="benefit">
+   <span class="benefit-icon">☏</span>
+   Support
+  </div>
+  <div class="benefit-note">
+   Play More<br>with AURA ♥
+  </div>
+ </aside>
 
 </section>
-<!-- ORDER HISTORY -->
+
 <section class="panel">
  <h2 class="panel-title">📦 My Orders</h2>
  <button class="confirm-button" onclick="loadMyOrders()">
   Refresh Orders
  </button>
- <div id="myOrders" class="message">Login ဝင်ပြီး ကြည့်ပါ။</div>
+ <div id="myOrders" class="message">
+  Login ဝင်ပြီး ကြည့်ပါ။
+ </div>
 </section>
 
-<!-- ADMIN DASHBOARD -->
 <section class="panel" id="adminDashboard" style="display:none">
  <h2 class="panel-title">🛡️ AURA ADMIN</h2>
 
  <div class="notice">
-  <b>Total Orders:</b> <span id="totalCount">0</span><br>
-  <b>Pending:</b> <span id="pendingCount">0</span><br>
-  <b>Completed:</b> <span id="completedCount">0</span>
+  Total Orders: <span id="totalCount">0</span><br>
+  Pending: <span id="pendingCount">0</span><br>
+  Completed: <span id="completedCount">0</span>
  </div>
 
  <button class="confirm-button" onclick="auraLoadAdminOrders()">
@@ -475,10 +380,12 @@ line-height:1.6;
  <div id="ordersList"></div>
 </section>
 
-<!-- ACCOUNT -->
 <section class="panel">
  <h2 class="panel-title">👤 AURA Account</h2>
- <div id="authStatus">Login ဝင်ထားခြင်း မရှိသေးပါ။</div>
+
+ <div id="authStatus">
+  Login ဝင်ထားခြင်း မရှိသေးပါ။
+ </div>
 
  <button class="confirm-button" onclick="auraGoogleLogin()">
   Continue with Google
@@ -497,6 +404,7 @@ line-height:1.6;
 </footer>
 
 <script type="module">
+
 import {initializeApp}
 from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 
@@ -517,8 +425,10 @@ import {
  updateDoc,
  serverTimestamp,
  query,
- orderBy
+ orderBy,
+ where
 } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+
 
 const firebaseConfig={
  apiKey:"AIzaSyDkCgqgLy2GC_kNbReVdzUnyULYnNEYjkI",
@@ -531,6 +441,7 @@ const firebaseConfig={
 };
 
 const ADMIN_EMAIL="ak0061266@gmail.com";
+
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
@@ -538,6 +449,7 @@ const provider=new GoogleAuthProvider();
 
 let selectedPackage=null;
 let selectedPayment="";
+
 
 window.selectPackage=(name,price,btn)=>{
  selectedPackage={name,price};
@@ -551,6 +463,7 @@ window.selectPackage=(name,price,btn)=>{
  name+" — "+price.toLocaleString()+" MMK";
 };
 
+
 window.selectPayment=(method,btn)=>{
  selectedPayment=method;
 
@@ -560,14 +473,16 @@ window.selectPayment=(method,btn)=>{
  btn.classList.add("selected");
 };
 
+
 window.auraGoogleLogin=async()=>{
  try{
   await signInWithPopup(auth,provider);
  }catch(e){
   document.getElementById("authStatus").textContent=
-  "Login Error: "+e.message;
+  "Login Error: "+e.code+" "+e.message;
  }
 };
+
 
 window.auraLogout=async()=>{
  try{
@@ -576,6 +491,7 @@ window.auraLogout=async()=>{
   alert(e.message);
  }
 };
+
 
 onAuthStateChanged(auth,user=>{
  const status=document.getElementById("authStatus");
@@ -596,11 +512,14 @@ onAuthStateChanged(auth,user=>{
  }
 });
 
+
 window.confirmOrder=async()=>{
  const user=auth.currentUser;
+
  const playerID=document.getElementById("playerID").value.trim();
  const serverID=document.getElementById("serverID").value.trim();
  const transactionID=document.getElementById("transactionID").value.trim();
+
  const msg=document.getElementById("orderMessage");
 
  if(!user){
@@ -609,7 +528,7 @@ window.confirmOrder=async()=>{
  }
 
  if(!selectedPackage||!selectedPayment||!playerID||!serverID){
-  msg.textContent="Package, Player ID, Server ID နဲ့ Payment ကို ဖြည့်ပါ။";
+  msg.textContent="Package, Player ID, Server ID နဲ့ Payment ကိုဖြည့်ပါ။";
   return;
  }
 
@@ -630,13 +549,15 @@ window.confirmOrder=async()=>{
    createdAt:serverTimestamp()
   });
 
-  msg.textContent="Demo Order Saved! Order ID: "+result.id+
-  " — ငွေပေးချေမှုနှင့် ပစ္စည်းပို့ဆောင်မှု မရှိပါ။";
+  msg.textContent=
+  "Demo Order Saved! Order ID: "+result.id+
+  " — No payment was collected and no diamonds were delivered.";
 
  }catch(e){
-  msg.textContent="Save Error: "+e.message;
+  msg.textContent="Save Error: "+e.code+" "+e.message;
  }
 };
+
 
 window.loadMyOrders=async()=>{
  const user=auth.currentUser;
@@ -650,32 +571,39 @@ window.loadMyOrders=async()=>{
  box.textContent="Loading...";
 
  try{
-  const snap=await getDocs(collection(db,"Orders"));
+  const snap=await getDocs(
+   query(
+    collection(db,"Orders"),
+    where("uid","==",user.uid)
+   )
+  );
+
   box.innerHTML="";
 
-  let found=0;
+  if(snap.empty){
+   box.textContent="Order မရှိသေးပါ။";
+   return;
+  }
 
   snap.forEach(d=>{
    const o=d.data();
 
-   if(o.uid===user.uid){
-    found++;
+   const item=document.createElement("div");
+   item.className="order-card";
 
-    const item=document.createElement("div");
-    item.className="notice";
-    item.textContent=
-    o.product+" | "+o.price+" MMK | "+o.status+" | DEMO";
+   item.textContent=
+   o.product+" | "+
+   Number(o.price).toLocaleString()+" MMK | "+
+   o.status+" | DEMO";
 
-    box.appendChild(item);
-   }
+   box.appendChild(item);
   });
 
-  if(!found)box.textContent="Order မရှိသေးပါ။";
-
  }catch(e){
-  box.textContent="Error: "+e.message;
+  box.textContent="Error: "+e.code+" "+e.message;
  }
 };
+
 
 window.auraLoadAdminOrders=async()=>{
  const user=auth.currentUser;
@@ -688,15 +616,18 @@ window.auraLoadAdminOrders=async()=>{
  }
 
  msg.textContent="Loading...";
+ list.innerHTML="";
 
  try{
   const snap=await getDocs(
-   query(collection(db,"Orders"),orderBy("createdAt","desc"))
+   query(
+    collection(db,"Orders"),
+    orderBy("createdAt","desc")
+   )
   );
 
   let pending=0;
   let completed=0;
-  let rows="";
 
   snap.forEach(d=>{
    const o=d.data();
@@ -704,57 +635,56 @@ window.auraLoadAdminOrders=async()=>{
    if(o.status==="Completed")completed++;
    else pending++;
 
-   const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-   }[c]));
+   const card=document.createElement("div");
+   card.className="order-card";
 
-   rows+=`
-   <div class="notice">
-    <b>${safe(o.product)}</b><br>
-    Player ID: ${safe(o.playerID)}<br>
-    Server ID: ${safe(o.serverID)}<br>
-    Price: ${safe(o.price)} MMK<br>
-    Payment: ${safe(o.paymentMethod)}<br>
-    Status: ${safe(o.status)}<br>
-    <button class="confirm-button"
-     data-order="${safe(d.id)}"
-     ${o.status==="Completed"?"disabled":""}>
-     Mark Completed
-    </button>
-   </div>`;
+   const details=document.createElement("div");
+   details.textContent=
+    "Product: "+o.product+
+    "\nPlayer ID: "+o.playerID+
+    "\nServer ID: "+o.serverID+
+    "\nPrice: "+o.price+" MMK"+
+    "\nPayment: "+o.paymentMethod+
+    "\nStatus: "+o.status+
+    "\nDEMO ORDER";
+
+   details.style.whiteSpace="pre-line";
+   card.appendChild(details);
+
+   if(o.status!=="Completed"){
+    const btn=document.createElement("button");
+    btn.className="confirm-button";
+    btn.textContent="Mark Completed";
+
+    btn.onclick=async()=>{
+     try{
+      await updateDoc(
+       doc(db,"Orders",d.id),
+       {status:"Completed"}
+      );
+
+      msg.textContent="Order status updated.";
+      window.auraLoadAdminOrders();
+
+     }catch(e){
+      msg.textContent="Update Error: "+e.code+" "+e.message;
+     }
+    };
+
+    card.appendChild(btn);
+   }
+
+   list.appendChild(card);
   });
 
   document.getElementById("totalCount").textContent=snap.size;
   document.getElementById("pendingCount").textContent=pending;
   document.getElementById("completedCount").textContent=completed;
 
-  list.innerHTML=rows||"No orders yet.";
-
-  list.querySelectorAll("[data-order]").forEach(btn=>{
-   btn.addEventListener("click",async()=>{
-    try{
-     await updateDoc(
-      doc(db,"Orders",btn.dataset.order),
-      {status:"Completed"}
-     );
-
-     msg.textContent="Order Completed.";
-     window.auraLoadAdminOrders();
-
-    }catch(e){
-     msg.textContent="Update Error: "+e.message;
-    }
-   });
-  });
-
   msg.textContent="Orders loaded.";
 
  }catch(e){
-  msg.textContent="Admin Error: "+e.message;
+  msg.textContent="Admin Error: "+e.code+" "+e.message;
  }
 };
 
