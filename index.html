@@ -5,139 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#090817">
 <title>AURA TOP UP</title>
-
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#090817;
- color:#fff;
-}
-header{
- padding:20px;
- background:#111027;
- display:flex;
- justify-content:space-between;
- align-items:center;
- border-bottom:1px solid #29244c;
-}
-.logo{
- font-size:22px;
- font-weight:bold;
- color:#a78bfa;
- letter-spacing:2px;
-}
-button{
- border:0;
- border-radius:10px;
- padding:12px 16px;
- background:#8b5cf6;
- color:white;
- font-weight:bold;
- cursor:pointer;
-}
-button:active{opacity:.8}
-.container{
- max-width:900px;
- margin:auto;
- padding:18px;
-}
-.hero{
- text-align:center;
- padding:35px 15px;
- background:linear-gradient(135deg,#21134a,#111027);
- border:1px solid #393064;
- border-radius:18px;
- margin:18px 0;
-}
-.hero h1{
- color:#c4b5fd;
- font-size:32px;
- margin:5px;
-}
-.hero p{color:#bbb}
-.section-title{
- color:#c4b5fd;
- margin-top:28px;
-}
-.games,.packages{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px;
-}
-.card{
- background:#15132b;
- border:1px solid #302952;
- padding:16px;
- border-radius:14px;
- cursor:pointer;
-}
-.card.selected{
- border:2px solid #a78bfa;
- background:#241b46;
-}
-.game-icon{
- font-size:30px;
- margin-bottom:8px;
-}
-.card h3{margin:5px 0}
+body{margin:0;font-family:Arial,sans-serif;background:#090817;color:#fff}
+header{padding:20px;background:#111027;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29244c}
+.logo{font-size:22px;font-weight:bold;color:#a78bfa;letter-spacing:2px}
+button{border:0;border-radius:10px;padding:11px 14px;background:#8b5cf6;color:white;font-weight:bold;cursor:pointer;margin:3px}
+.container{max-width:900px;margin:auto;padding:18px}
+.hero{text-align:center;padding:35px 15px;background:linear-gradient(135deg,#21134a,#111027);border:1px solid #393064;border-radius:18px;margin:18px 0}
+.hero h1{color:#c4b5fd;font-size:32px}
+.section-title{color:#c4b5fd;margin-top:28px}
+.games,.packages{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:#15132b;border:1px solid #302952;padding:16px;border-radius:14px;cursor:pointer}
+.card.selected{border:2px solid #a78bfa;background:#241b46}
+.game-icon{font-size:30px}
 .card p{color:#aaa;font-size:13px}
-.price{
- color:#c4b5fd;
- font-weight:bold;
- font-size:18px;
-}
-form,.panel{
- background:#15132b;
- border:1px solid #302952;
- border-radius:15px;
- padding:18px;
- margin-top:15px;
-}
-label{
- display:block;
- margin:13px 0 7px;
- color:#ccc;
-}
-input,select{
- width:100%;
- padding:13px;
- border-radius:9px;
- border:1px solid #39345a;
- background:#0c0b1b;
- color:white;
- outline:none;
-}
+.price{color:#c4b5fd;font-weight:bold;font-size:18px}
+form,.panel{background:#15132b;border:1px solid #302952;border-radius:15px;padding:18px;margin-top:15px}
+label{display:block;margin:13px 0 7px;color:#ccc}
+input,select{width:100%;padding:13px;border-radius:9px;border:1px solid #39345a;background:#0c0b1b;color:white;outline:none}
 .full{width:100%;margin-top:15px}
-.notice{
- color:#b9a9e9;
- font-size:12px;
- line-height:1.6;
-}
+.notice{color:#b9a9e9;font-size:12px;line-height:1.6}
 .hidden{display:none}
-.order{
- background:#211b3d;
- border-radius:10px;
- padding:13px;
- margin:10px 0;
- font-size:13px;
- line-height:1.8;
-}
-footer{
- text-align:center;
- color:#777;
- padding:30px 10px;
- font-size:12px;
-}
-hr{border-color:#302952}
-@media(min-width:600px){
- .games{grid-template-columns:repeat(3,1fr)}
- .packages{grid-template-columns:repeat(3,1fr)}
-}
+.order{background:#211b3d;border:1px solid #393064;border-radius:10px;padding:14px;margin:12px 0;font-size:13px;line-height:1.8;overflow-wrap:anywhere}
+.order-id{color:#c4b5fd;font-weight:bold}
+.status{font-weight:bold;color:#facc15}
+.complete{background:#16834a}
+.cancel{background:#a83248}
+.pending{background:#7254bd}
+footer{text-align:center;color:#777;padding:30px 10px;font-size:12px}
+@media(min-width:600px){.games{grid-template-columns:repeat(3,1fr)}.packages{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -154,57 +53,35 @@ hr{border-color:#302952}
 </section>
 
 <h3 class="section-title">🎮 Select Game</h3>
-
 <div class="games">
  <div class="card selected" onclick="selectGame('Mobile Legends',this)">
-  <div class="game-icon">⚔️</div>
-  <h3>Mobile Legends</h3>
-  <p>MLBB Diamonds</p>
+  <div class="game-icon">⚔️</div><h3>Mobile Legends</h3><p>MLBB Diamonds</p>
  </div>
-
  <div class="card" onclick="selectGame('Clash of Clans',this)">
-  <div class="game-icon">🏰</div>
-  <h3>Clash of Clans</h3>
-  <p>COC Gems</p>
+  <div class="game-icon">🏰</div><h3>Clash of Clans</h3><p>COC Gems</p>
  </div>
-
  <div class="card" onclick="selectGame('Other Games',this)">
-  <div class="game-icon">🎮</div>
-  <h3>Other Games</h3>
-  <p>Coming Soon</p>
+  <div class="game-icon">🎮</div><h3>Other Games</h3><p>Coming Soon</p>
  </div>
 </div>
 
 <h3 class="section-title">💎 Select Package</h3>
-
 <div class="packages">
  <div class="card" onclick="selectPackage('Weekly Diamond Pass',7900,this)">
-  <h3>Weekly Pass</h3>
-  <p>Mobile Legends</p>
-  <div class="price">7,900 MMK</div>
+  <h3>Weekly Pass</h3><p>Mobile Legends</p><div class="price">7,900 MMK</div>
  </div>
-
  <div class="card" onclick="selectPackage('86 Diamonds',2550,this)">
-  <h3>86 Diamonds</h3>
-  <p>Mobile Legends</p>
-  <div class="price">2,550 MMK</div>
+  <h3>86 Diamonds</h3><p>Mobile Legends</p><div class="price">2,550 MMK</div>
  </div>
-
  <div class="card" onclick="selectPackage('172 Diamonds',4800,this)">
-  <h3>172 Diamonds</h3>
-  <p>Mobile Legends</p>
-  <div class="price">4,800 MMK</div>
+  <h3>172 Diamonds</h3><p>Mobile Legends</p><div class="price">4,800 MMK</div>
  </div>
-
  <div class="card" onclick="selectPackage('257 Diamonds',8000,this)">
-  <h3>257 Diamonds</h3>
-  <p>Mobile Legends</p>
-  <div class="price">8,000 MMK</div>
+  <h3>257 Diamonds</h3><p>Mobile Legends</p><div class="price">8,000 MMK</div>
  </div>
 </div>
 
 <h3 class="section-title">📝 Order Information</h3>
-
 <form onsubmit="submitOrder(event)">
  <label>Game Name</label>
  <input id="game" value="Mobile Legends" readonly>
@@ -229,11 +106,7 @@ hr{border-color:#302952}
  </select>
 
  <button class="full" type="submit">Confirm Demo Order</button>
- <p class="notice">
-  သတိပြုရန် - ဤ Website သည် Demo ဖြစ်သည်။
-  တကယ့်ငွေပေးချေမှု မပြုလုပ်ပါနှင့်။
-  PIN၊ OTP၊ Password များ မထည့်ပါနှင့်။
- </p>
+ <p class="notice">ဤ Website သည် Demo ဖြစ်သည်။ တကယ့်ငွေပေးချေမှု မပြုလုပ်ပါနှင့်။ PIN၊ OTP၊ Password များ မထည့်ပါနှင့်။</p>
 </form>
 
 <div class="panel">
@@ -257,260 +130,200 @@ hr{border-color:#302952}
 
 </div>
 
-<footer>
- AURA TOP UP © 2026<br>
- Demo Store • All Rights Reserved
-</footer>
+<footer>AURA TOP UP © 2026<br>Demo Store • All Rights Reserved</footer>
 
 <script type="module">
-import { initializeApp }
- from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
- getAuth,
- GoogleAuthProvider,
- signInWithPopup,
- signOut,
- onAuthStateChanged
+ getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
- getFirestore,
- collection,
- addDoc,
- getDocs,
- query,
- where,
- orderBy,
- serverTimestamp
+ getFirestore,collection,addDoc,getDocs,query,where,orderBy,
+ serverTimestamp,doc,updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig = {
- apiKey: "AIzaSyDkCgqgLy2GC_kNbReVdzUnyULYnNEYjkI",
- authDomain: "aura-top-up-fd609.firebaseapp.com",
- projectId: "aura-top-up-fd609",
- storageBucket: "aura-top-up-fd609.firebasestorage.app",
- messagingSenderId: "822916904997",
- appId: "1:822916904997:web:c6de6a6ace7059f6e527cc",
- measurementId: "G-F1JJT3P1VQ"
+const firebaseConfig={
+ apiKey:"AIzaSyDkCgqgLy2GC_kNbReVdzUnyULYnNEYjkI",
+ authDomain:"aura-top-up-fd609.firebaseapp.com",
+ projectId:"aura-top-up-fd609",
+ storageBucket:"aura-top-up-fd609.firebasestorage.app",
+ messagingSenderId:"822916904997",
+ appId:"1:822916904997:web:c6de6a6ace7059f6e527cc",
+ measurementId:"G-F1JJT3P1VQ"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const provider=new GoogleAuthProvider();
+const adminEmail="ak0061266@gmail.com";
 
-const adminEmail = "ak0061266@gmail.com";
+let selectedGame="Mobile Legends";
+let selectedPackage="";
+let selectedPrice=0;
 
-let selectedGame = "Mobile Legends";
-let selectedPackage = "";
-let selectedPrice = 0;
-
-window.selectGame = (name,element) => {
- selectedGame = name;
- document.getElementById("game").value = name;
-
- document.querySelectorAll(".games .card")
- .forEach(card=>card.classList.remove("selected"));
-
+window.selectGame=(name,element)=>{
+ selectedGame=name;
+ document.getElementById("game").value=name;
+ document.querySelectorAll(".games .card").forEach(c=>c.classList.remove("selected"));
  element.classList.add("selected");
 };
 
-window.selectPackage = (name,price,element) => {
- selectedPackage = name;
- selectedPrice = price;
-
- document.getElementById("package").value = name;
- document.getElementById("price").value =
- price.toLocaleString("en-US") + " MMK";
-
- document.querySelectorAll(".packages .card")
- .forEach(card=>card.classList.remove("selected"));
-
+window.selectPackage=(name,price,element)=>{
+ selectedPackage=name;
+ selectedPrice=price;
+ document.getElementById("package").value=name;
+ document.getElementById("price").value=price.toLocaleString("en-US")+" MMK";
+ document.querySelectorAll(".packages .card").forEach(c=>c.classList.remove("selected"));
  element.classList.add("selected");
 };
 
-window.login = async () => {
- try {
-  await signInWithPopup(auth,provider);
- } catch(error) {
-  alert("Login Error: " + error.message);
- }
+window.login=async()=>{
+ try{await signInWithPopup(auth,provider)}
+ catch(e){alert("Login Error: "+e.message)}
 };
 
-window.logout = async () => {
- try {
-  await signOut(auth);
-  alert("Logged out");
- } catch(error) {
-  alert(error.message);
- }
+window.logout=async()=>{
+ try{await signOut(auth);alert("Logged out")}
+ catch(e){alert(e.message)}
 };
 
 onAuthStateChanged(auth,user=>{
- const info = document.getElementById("userInfo");
- const dashboard = document.getElementById("adminDashboard");
-
- if(user){
-  info.textContent = user.email;
-  dashboard.classList.toggle(
-   "hidden",
-   user.email !== adminEmail
-  );
- }else{
-  info.textContent = "Not logged in";
-  dashboard.classList.add("hidden");
- }
+ document.getElementById("userInfo").textContent=user?user.email:"Not logged in";
+ document.getElementById("adminDashboard").classList.toggle("hidden",!user||user.email!==adminEmail);
 });
 
-window.submitOrder = async (event) => {
+window.submitOrder=async(event)=>{
  event.preventDefault();
+ const user=auth.currentUser;
 
- const user = auth.currentUser;
+ if(!user){alert("Please login first.");return}
+ if(!selectedPackage||!selectedPrice){alert("Please select a package.");return}
+ if(selectedGame!=="Mobile Legends"){alert("This game is not available yet.");return}
 
- if(!user){
-  alert("Please login with Google first.");
-  return;
- }
+ const playerId=document.getElementById("playerId").value.trim();
+ const serverId=document.getElementById("serverId").value.trim();
+ const paymentMethod=document.getElementById("payment").value;
 
- if(!selectedPackage || !selectedPrice){
-  alert("Please select a package.");
-  return;
- }
-
- if(selectedGame !== "Mobile Legends"){
-  alert("This game is not available yet.");
-  return;
- }
-
- const playerId = document.getElementById("playerId").value.trim();
- const serverId = document.getElementById("serverId").value.trim();
- const paymentMethod = document.getElementById("payment").value;
-
- if(!playerId || !paymentMethod){
-  alert("Please complete the required fields.");
-  return;
- }
+ if(!playerId||!paymentMethod){alert("Complete required fields.");return}
 
  try{
   await addDoc(collection(db,"Orders"),{
-   uid:user.uid,
-   email:user.email,
-   game:selectedGame,
-   product:selectedPackage,
-   price:selectedPrice,
-   playerId:playerId,
-   serverId:serverId,
-   paymentMethod:paymentMethod,
-   isDemo:true,
-   status:"Pending",
-   createdAt:serverTimestamp()
+   uid:user.uid,email:user.email,game:selectedGame,
+   product:selectedPackage,price:selectedPrice,
+   playerId,serverId,paymentMethod,
+   isDemo:true,status:"Pending",createdAt:serverTimestamp()
   });
-
   alert("Demo Order Submitted!");
   event.target.reset();
-
-  document.getElementById("game").value = selectedGame;
-  document.getElementById("package").value = "";
-  document.getElementById("price").value = "";
-  selectedPackage = "";
-  selectedPrice = 0;
-
- }catch(error){
-  alert("Order Error: " + error.message);
- }
+  document.getElementById("game").value=selectedGame;
+  selectedPackage="";
+  selectedPrice=0;
+ }catch(e){alert("Order Error: "+e.message)}
 };
 
-window.loadMyOrders = async () => {
- const user = auth.currentUser;
- const output = document.getElementById("myOrders");
+function dateText(timestamp){
+ if(!timestamp||!timestamp.toDate)return "Date unavailable";
+ return timestamp.toDate().toLocaleString();
+}
 
- if(!user){
-  alert("Please login first.");
-  return;
- }
+function makeOrderCard(id,data,isAdmin){
+ const item=document.createElement("div");
+ item.className="order";
 
- output.textContent = "Loading...";
+ const title=document.createElement("div");
+ title.className="order-id";
+ title.textContent="Order ID: "+id;
+ item.appendChild(title);
 
- try{
-  const q = query(
-   collection(db,"Orders"),
-   where("uid","==",user.uid)
-  );
+ const details=[
+  "Email: "+(data.email||"-"),
+  "Game: "+(data.game||"-"),
+  "Package: "+(data.product||"-"),
+  "Price: "+(data.price??"-")+" MMK",
+  "Player ID: "+(data.playerId||"-"),
+  "Server ID: "+(data.serverId||"-"),
+  "Payment: "+(data.paymentMethod||"-"),
+  "Date: "+dateText(data.createdAt)
+ ];
 
-  const snapshot = await getDocs(q);
-  output.innerHTML = "";
+ details.forEach(text=>{
+  const line=document.createElement("div");
+  line.textContent=text;
+  item.appendChild(line);
+ });
 
-  if(snapshot.empty){
-   output.textContent = "No orders yet.";
-   return;
-  }
+ const status=document.createElement("div");
+ status.className="status";
+ status.textContent="Status: "+(data.status||"Pending");
+ item.appendChild(status);
 
-  snapshot.forEach(doc=>{
-   const data = doc.data();
-   const item = document.createElement("div");
-   item.className = "order";
-
-   item.textContent =
-    data.product + " | " +
-    data.price + " MMK | Status: " +
-    data.status;
-
-   output.appendChild(item);
+ if(isAdmin){
+  ["Pending","Completed","Cancelled"].forEach(value=>{
+   const btn=document.createElement("button");
+   btn.textContent=value;
+   btn.className=value==="Completed"?"complete":value==="Cancelled"?"cancel":"pending";
+   btn.onclick=()=>changeStatus(id,value,btn);
+   item.appendChild(btn);
   });
-
- }catch(error){
-  output.textContent = "Error: " + error.message;
  }
+
+ return item;
+}
+
+window.loadMyOrders=async()=>{
+ const user=auth.currentUser;
+ const output=document.getElementById("myOrders");
+ if(!user){alert("Please login first.");return}
+
+ output.textContent="Loading...";
+ try{
+  const q=query(collection(db,"Orders"),where("uid","==",user.uid));
+  const snapshot=await getDocs(q);
+  output.innerHTML="";
+
+  if(snapshot.empty){output.textContent="No orders yet.";return}
+
+  snapshot.forEach(d=>output.appendChild(makeOrderCard(d.id,d.data(),false)));
+ }catch(e){output.textContent="Error: "+e.message}
 };
 
-window.loadAdminOrders = async () => {
- const user = auth.currentUser;
- const output = document.getElementById("ordersList");
+window.loadAdminOrders=async()=>{
+ const user=auth.currentUser;
+ const output=document.getElementById("ordersList");
 
- if(!user || user.email !== adminEmail){
-  alert("Admin access only!");
-  return;
- }
+ if(!user||user.email!==adminEmail){alert("Admin access only!");return}
 
- output.textContent = "Loading...";
-
+ output.textContent="Loading...";
  try{
-  const q = query(
-   collection(db,"Orders"),
-   orderBy("createdAt","desc")
-  );
+  const q=query(collection(db,"Orders"),orderBy("createdAt","desc"));
+  const snapshot=await getDocs(q);
+  output.innerHTML="";
 
-  const snapshot = await getDocs(q);
-  output.innerHTML = "";
+  if(snapshot.empty){output.textContent="No orders found.";return}
 
-  if(snapshot.empty){
-   output.textContent = "No orders found.";
-   return;
-  }
+  snapshot.forEach(d=>output.appendChild(makeOrderCard(d.id,d.data(),true)));
+ }catch(e){output.textContent="Admin Error: "+e.message}
+};
 
-  snapshot.forEach(doc=>{
-   const data = doc.data();
-   const item = document.createElement("div");
-   item.className = "order";
+window.changeStatus=async(id,newStatus,button)=>{
+ const user=auth.currentUser;
+ if(!user||user.email!==adminEmail){alert("Admin access only!");return}
 
-   item.textContent =
-    "Email: " + data.email +
-    " | Game: " + data.game +
-    " | Package: " + data.product +
-    " | Price: " + data.price +
-    " | Player ID: " + data.playerId +
-    " | Payment: " + data.paymentMethod +
-    " | Status: " + data.status;
+ if(!confirm("Change order status to "+newStatus+"?"))return;
 
-   output.appendChild(item);
-  });
-
- }catch(error){
-  output.textContent = "Admin Error: " + error.message;
+ button.disabled=true;
+ try{
+  await updateDoc(doc(db,"Orders",id),{status:newStatus});
+  alert("Order status updated!");
+  await loadAdminOrders();
+ }catch(e){
+  alert("Update Error: "+e.message);
+  button.disabled=false;
  }
 };
 </script>
-
 </body>
 </html>
