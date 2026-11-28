@@ -11,6 +11,7 @@ body{margin:0;font-family:Arial,sans-serif;background:#090817;color:#fff}
 header{padding:20px;background:#111027;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29244c}
 .logo{font-size:22px;font-weight:bold;color:#a78bfa;letter-spacing:2px}
 button{border:0;border-radius:10px;padding:11px 14px;background:#8b5cf6;color:white;font-weight:bold;cursor:pointer;margin:3px}
+button:disabled{opacity:.5;cursor:not-allowed}
 .container{max-width:900px;margin:auto;padding:18px}
 .hero{text-align:center;padding:35px 15px;background:linear-gradient(135deg,#21134a,#111027);border:1px solid #393064;border-radius:18px;margin:18px 0}
 .hero h1{color:#c4b5fd;font-size:32px}
@@ -29,12 +30,14 @@ input,select{width:100%;padding:13px;border-radius:9px;border:1px solid #39345a;
 .hidden{display:none}
 .order{background:#211b3d;border:1px solid #393064;border-radius:10px;padding:14px;margin:12px 0;font-size:13px;line-height:1.8;overflow-wrap:anywhere}
 .order-id{color:#c4b5fd;font-weight:bold}
-.status{font-weight:bold;color:#facc15}
-.complete{background:#16834a}
-.cancel{background:#a83248}
-.pending{background:#7254bd}
+.status{font-weight:bold;color:#facc15;margin:8px 0}
+.status-select{margin:8px 0}
+.save-status{width:100%;background:#16834a;margin:5px 0}
 footer{text-align:center;color:#777;padding:30px 10px;font-size:12px}
-@media(min-width:600px){.games{grid-template-columns:repeat(3,1fr)}.packages{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:600px){
+ .games{grid-template-columns:repeat(3,1fr)}
+ .packages{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
 <body>
@@ -55,13 +58,16 @@ footer{text-align:center;color:#777;padding:30px 10px;font-size:12px}
 <h3 class="section-title">🎮 Select Game</h3>
 <div class="games">
  <div class="card selected" onclick="selectGame('Mobile Legends',this)">
-  <div class="game-icon">⚔️</div><h3>Mobile Legends</h3><p>MLBB Diamonds</p>
+  <div class="game-icon">⚔️</div>
+  <h3>Mobile Legends</h3><p>MLBB Diamonds</p>
  </div>
  <div class="card" onclick="selectGame('Clash of Clans',this)">
-  <div class="game-icon">🏰</div><h3>Clash of Clans</h3><p>COC Gems</p>
+  <div class="game-icon">🏰</div>
+  <h3>Clash of Clans</h3><p>COC Gems</p>
  </div>
  <div class="card" onclick="selectGame('Other Games',this)">
-  <div class="game-icon">🎮</div><h3>Other Games</h3><p>Coming Soon</p>
+  <div class="game-icon">🎮</div>
+  <h3>Other Games</h3><p>Coming Soon</p>
  </div>
 </div>
 
@@ -82,7 +88,7 @@ footer{text-align:center;color:#777;padding:30px 10px;font-size:12px}
 </div>
 
 <h3 class="section-title">📝 Order Information</h3>
-<form onsubmit="submitOrder(event)">
+<form id="orderForm" onsubmit="submitOrder(event)">
  <label>Game Name</label>
  <input id="game" value="Mobile Legends" readonly>
 
@@ -124,6 +130,7 @@ footer{text-align:center;color:#777;padding:30px 10px;font-size:12px}
 
 <div id="adminDashboard" class="panel hidden">
  <h3>⚙️ Admin Dashboard</h3>
+ <p style="color:#b9a9e9;font-size:13px">Admin Order Management</p>
  <button onclick="loadAdminOrders()">Load Admin Orders</button>
  <div id="ordersList"></div>
 </div>
@@ -140,7 +147,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
- getFirestore,collection,addDoc,getDocs,query,where,orderBy,
+ getFirestore,collection,addDoc,getDocs,query,where,
  serverTimestamp,doc,updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -181,47 +188,84 @@ window.selectPackage=(name,price,element)=>{
 };
 
 window.login=async()=>{
- try{await signInWithPopup(auth,provider)}
- catch(e){alert("Login Error: "+e.message)}
+ try{
+  await signInWithPopup(auth,provider);
+ }catch(e){
+  alert("Login Error: "+e.message);
+ }
 };
 
 window.logout=async()=>{
- try{await signOut(auth);alert("Logged out")}
- catch(e){alert(e.message)}
+ try{
+  await signOut(auth);
+  alert("Logged out");
+ }catch(e){
+  alert(e.message);
+ }
 };
 
 onAuthStateChanged(auth,user=>{
  document.getElementById("userInfo").textContent=user?user.email:"Not logged in";
- document.getElementById("adminDashboard").classList.toggle("hidden",!user||user.email!==adminEmail);
+ document.getElementById("adminDashboard").classList.toggle(
+  "hidden",!user||user.email!==adminEmail
+ );
 });
 
 window.submitOrder=async(event)=>{
  event.preventDefault();
+
  const user=auth.currentUser;
 
- if(!user){alert("Please login first.");return}
- if(!selectedPackage||!selectedPrice){alert("Please select a package.");return}
- if(selectedGame!=="Mobile Legends"){alert("This game is not available yet.");return}
+ if(!user){
+  alert("Please login first.");
+  return;
+ }
+
+ if(!selectedPackage||!selectedPrice){
+  alert("Please select a package.");
+  return;
+ }
+
+ if(selectedGame!=="Mobile Legends"){
+  alert("This game is not available yet.");
+  return;
+ }
 
  const playerId=document.getElementById("playerId").value.trim();
  const serverId=document.getElementById("serverId").value.trim();
  const paymentMethod=document.getElementById("payment").value;
 
- if(!playerId||!paymentMethod){alert("Complete required fields.");return}
+ if(!playerId||!paymentMethod){
+  alert("Complete required fields.");
+  return;
+ }
 
  try{
   await addDoc(collection(db,"Orders"),{
-   uid:user.uid,email:user.email,game:selectedGame,
-   product:selectedPackage,price:selectedPrice,
-   playerId,serverId,paymentMethod,
-   isDemo:true,status:"Pending",createdAt:serverTimestamp()
+   uid:user.uid,
+   email:user.email,
+   game:selectedGame,
+   product:selectedPackage,
+   price:selectedPrice,
+   playerId,
+   serverId,
+   paymentMethod,
+   isDemo:true,
+   status:"Pending",
+   createdAt:serverTimestamp()
   });
+
   alert("Demo Order Submitted!");
-  event.target.reset();
+  document.getElementById("orderForm").reset();
   document.getElementById("game").value=selectedGame;
+  document.getElementById("package").value="";
+  document.getElementById("price").value="";
   selectedPackage="";
   selectedPrice=0;
- }catch(e){alert("Order Error: "+e.message)}
+
+ }catch(e){
+  alert("Order Error: "+e.message);
+ }
 };
 
 function dateText(timestamp){
@@ -249,9 +293,9 @@ function makeOrderCard(id,data,isAdmin){
   "Date: "+dateText(data.createdAt)
  ];
 
- details.forEach(text=>{
+ details.forEach(value=>{
   const line=document.createElement("div");
-  line.textContent=text;
+  line.textContent=value;
   item.appendChild(line);
  });
 
@@ -261,13 +305,26 @@ function makeOrderCard(id,data,isAdmin){
  item.appendChild(status);
 
  if(isAdmin){
+  const select=document.createElement("select");
+  select.className="status-select";
+  select.setAttribute("aria-label","Choose order status");
+
   ["Pending","Completed","Cancelled"].forEach(value=>{
-   const btn=document.createElement("button");
-   btn.textContent=value;
-   btn.className=value==="Completed"?"complete":value==="Cancelled"?"cancel":"pending";
-   btn.onclick=()=>changeStatus(id,value,btn);
-   item.appendChild(btn);
+   const option=document.createElement("option");
+   option.value=value;
+   option.textContent=value;
+   if(value===(data.status||"Pending"))option.selected=true;
+   select.appendChild(option);
   });
+
+  const save=document.createElement("button");
+  save.className="save-status";
+  save.textContent="Save Status";
+
+  save.onclick=()=>changeStatus(id,select.value,save);
+
+  item.appendChild(select);
+  item.appendChild(save);
  }
 
  return item;
@@ -276,52 +333,113 @@ function makeOrderCard(id,data,isAdmin){
 window.loadMyOrders=async()=>{
  const user=auth.currentUser;
  const output=document.getElementById("myOrders");
- if(!user){alert("Please login first.");return}
+
+ if(!user){
+  alert("Please login first.");
+  return;
+ }
 
  output.textContent="Loading...";
+
  try{
-  const q=query(collection(db,"Orders"),where("uid","==",user.uid));
+  const q=query(
+   collection(db,"Orders"),
+   where("uid","==",user.uid)
+  );
+
   const snapshot=await getDocs(q);
   output.innerHTML="";
 
-  if(snapshot.empty){output.textContent="No orders yet.";return}
+  if(snapshot.empty){
+   output.textContent="No orders yet.";
+   return;
+  }
 
-  snapshot.forEach(d=>output.appendChild(makeOrderCard(d.id,d.data(),false)));
- }catch(e){output.textContent="Error: "+e.message}
+  snapshot.forEach(d=>{
+   output.appendChild(makeOrderCard(d.id,d.data(),false));
+  });
+
+ }catch(e){
+  output.textContent="Error: "+e.message;
+ }
 };
 
 window.loadAdminOrders=async()=>{
  const user=auth.currentUser;
  const output=document.getElementById("ordersList");
 
- if(!user||user.email!==adminEmail){alert("Admin access only!");return}
+ if(!user||user.email!==adminEmail){
+  alert("Admin access only!");
+  return;
+ }
 
- output.textContent="Loading...";
+ output.textContent="Loading all orders...";
+
  try{
-  const q=query(collection(db,"Orders"),orderBy("createdAt","desc"));
-  const snapshot=await getDocs(q);
+  // No orderBy here, so older documents without createdAt are included too.
+  const snapshot=await getDocs(collection(db,"Orders"));
+
   output.innerHTML="";
 
-  if(snapshot.empty){output.textContent="No orders found.";return}
+  if(snapshot.empty){
+   output.textContent="No orders found.";
+   return;
+  }
 
-  snapshot.forEach(d=>output.appendChild(makeOrderCard(d.id,d.data(),true)));
- }catch(e){output.textContent="Admin Error: "+e.message}
+  const orders=snapshot.docs.slice();
+
+  orders.sort((a,b)=>{
+   const timeA=a.data().createdAt?.toMillis?.()||0;
+   const timeB=b.data().createdAt?.toMillis?.()||0;
+   return timeB-timeA;
+  });
+
+  const count=document.createElement("p");
+  count.style.color="#c4b5fd";
+  count.textContent="Total Orders: "+orders.length;
+  output.appendChild(count);
+
+  orders.forEach(d=>{
+   output.appendChild(makeOrderCard(d.id,d.data(),true));
+  });
+
+ }catch(e){
+  output.textContent="Admin Error: "+e.message;
+ }
 };
 
 window.changeStatus=async(id,newStatus,button)=>{
  const user=auth.currentUser;
- if(!user||user.email!==adminEmail){alert("Admin access only!");return}
 
- if(!confirm("Change order status to "+newStatus+"?"))return;
+ if(!user||user.email!==adminEmail){
+  alert("Admin access only!");
+  return;
+ }
+
+ if(!["Pending","Completed","Cancelled"].includes(newStatus)){
+  alert("Invalid status.");
+  return;
+ }
+
+ if(!confirm("Change order status to "+newStatus+"?")){
+  return;
+ }
 
  button.disabled=true;
+ button.textContent="Saving...";
+
  try{
-  await updateDoc(doc(db,"Orders",id),{status:newStatus});
+  await updateDoc(doc(db,"Orders",id),{
+   status:newStatus
+  });
+
   alert("Order status updated!");
   await loadAdminOrders();
+
  }catch(e){
   alert("Update Error: "+e.message);
   button.disabled=false;
+  button.textContent="Save Status";
  }
 };
 </script>
