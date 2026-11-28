@@ -3,133 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090817">
-<title>AURA TOP UP</title>
+<meta name="theme-color" content="#08051c">
+<title>AURA TOP UP | Demo Storefront</title>
 <style>
-:root{--bg:#090817;--panel:#151329;--panel2:#211b3b;--line:#403565;--purple:#a855f7;--cyan:#54d8ff;--text:#f8f5ff;--muted:#b9b0d0;--good:#42d392}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(ellipse at 12% 0%,#39205f 0,transparent 34%),radial-gradient(ellipse at 90% 35%,#102d53 0,transparent 30%),linear-gradient(145deg,#070611,#100d22 55%,#080713);color:var(--text);font-family:Arial,"Noto Sans Myanmar",sans-serif;min-height:100vh}
-button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
-.topbar{position:sticky;top:0;z-index:20;background:#0a0817ef;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff18}
-.top-inner{max-width:1180px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:1.5px;color:#e8d2ff;font-size:19px}
-.brand-mark{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#bd65ff,#4268ff);box-shadow:0 0 22px #8b5cf677;font-size:20px}
-.top-actions{display:flex;align-items:center;gap:9px}.lang-select{background:#201a37;color:white;border:1px solid #65508c;border-radius:10px;padding:9px 10px}
-.login-mini{background:linear-gradient(100deg,#9d4edd,#5b55db);border:0;color:white;border-radius:10px;padding:10px 14px;font-weight:700}
-.wrap{max-width:1180px;margin:auto;padding:24px 18px 60px}
-.hero{position:relative;overflow:hidden;border:1px solid #6a4c99;border-radius:25px;padding:32px 28px;background:linear-gradient(110deg,#25143eeb,#111c3bee),url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1500&q=80') center/cover;box-shadow:0 18px 55px #0007}
-.hero-content{position:relative;z-index:1;max-width:650px}.eyebrow{color:#b8eaff;font-size:12px;font-weight:800;letter-spacing:2px}
-.hero h1{font-size:clamp(30px,6vw,52px);line-height:1.08;margin:12px 0;color:white}.hero h1 span{background:linear-gradient(90deg,#d9a6ff,#67e4ff);background-clip:text;color:transparent}
-.hero p{color:#d0c8e3;line-height:1.7;max-width:540px}.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:800}.btn-primary{background:linear-gradient(100deg,#a855f7,#5368ef);color:white;box-shadow:0 8px 24px #7652d455}.btn-ghost{background:#ffffff12;border:1px solid #ffffff35;color:white}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px;max-width:530px}.stat{padding:12px;background:#08061577;border:1px solid #ffffff20;border-radius:13px}.stat strong{display:block;font-size:19px;color:#d8b5ff}.stat small{color:#bcb3d0}
-.section{margin-top:34px;scroll-margin-top:90px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:15px}.section-head h2{margin:0;font-size:22px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
-.pill{font-size:11px;color:#d9c0ff;border:1px solid #7954a7;background:#3b2458;padding:6px 10px;border-radius:99px;white-space:nowrap}
-.field{margin:10px 0}.field label{display:block;color:#d6c9ec;font-size:12px;margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border:1px solid #51416f;border-radius:10px;background:#2a2340;color:white;outline:none}
-.catalog{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.item-card{min-width:0;background:linear-gradient(155deg,#211b38,#121123);border:1px solid #40345f;border-radius:17px;overflow:hidden;transition:.2s;box-shadow:0 8px 22px #0003}.item-card:hover{transform:translateY(-3px);border-color:#a879e4}
-.item-image{height:132px;position:relative;background:#211b38;overflow:hidden}.item-image img{width:100%;height:100%;object-fit:cover;display:block}.item-image:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,#141126)}
-.item-icon{position:absolute;z-index:1;left:12px;bottom:9px;font-size:26px;text-shadow:0 3px 10px #000}.item-body{padding:12px}.item-body h3{margin:0 0 6px;font-size:15px}.item-body p{margin:0;color:var(--muted);font-size:12px;min-height:30px;line-height:1.45}
-.item-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}.status{font-size:10px;color:#9de9c4;background:#123b30;padding:5px 8px;border-radius:99px}.status.soon{color:#ffe0a2;background:#47351b}.small-btn{border:0;background:#8c4ed6;color:white;border-radius:9px;padding:8px 10px;font-size:11px;font-weight:800}
-.category-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 15px}.tab{border:1px solid #51416f;background:#17142a;color:#cfc5e4;padding:9px 13px;border-radius:999px}.tab.active{background:linear-gradient(90deg,#813bd0,#465be2);color:white;border-color:transparent}
-#topup{display:none}#topup.open{display:block;animation:fadeIn .25s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.store-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{background:linear-gradient(150deg,#1d1831,#121020);border:1px solid #51416f;border-radius:18px;padding:19px}.panel h3{margin:0 0 14px}
-.product-list{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.product-choice{position:relative;min-height:75px;border:1px solid #55436f;background:linear-gradient(145deg,#29223e,#171329);color:white;border-radius:12px;padding:12px;text-align:left;transition:.2s}.product-choice:hover{border-color:#c084fc;transform:translateY(-2px)}.product-choice.selected{border:2px solid #c084fc;background:linear-gradient(145deg,#493066,#29234d);box-shadow:0 0 15px #a855f755}
-.product-choice strong{display:block;font-size:14px}.product-choice small{display:block;color:#c9bbdd;margin-top:5px}.bonus-badge{display:inline-block;background:linear-gradient(90deg,#ffb52e,#ff6b35);color:#241300;padding:4px 7px;border-radius:20px;font-size:9px;font-weight:900;margin-left:4px}
-.product-choice.disabled{opacity:.65;border-style:dashed}.product-choice.disabled:hover{transform:none;border-color:#55436f}
-.price-box{padding:14px;text-align:center;background:linear-gradient(90deg,#382052,#202c55);border:1px solid #7655a0;border-radius:12px;color:#e2c3ff;font-weight:900;font-size:19px;margin:12px 0}
-.pay-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.pay-choice{display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #5c4b79;background:#29223e;color:white;border-radius:11px;padding:12px;text-align:center}.pay-choice.selected{border-color:#c084fc;background:#40285d}
-.payment-logo{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:9px;color:#fff;font-weight:900;font-size:17px;flex-shrink:0}.kbz-logo{background:#0876d1;box-shadow:inset 0 0 0 2px #ffffff55}.wave-logo{background:#f0a500;color:#211400;box-shadow:inset 0 0 0 2px #ffffff55}
-.payment-note{font-size:11px;color:#c9bbdd;margin-top:8px;line-height:1.6}.notice{font-size:12px;line-height:1.6;color:#c6bad9;background:#ffffff09;border:1px solid #ffffff17;border-radius:11px;padding:11px}
-#message{min-height:22px;color:#d7b5ff;font-size:13px;overflow-wrap:anywhere}.footer{border-top:1px solid #ffffff18;margin-top:42px;padding:22px 0;color:#9e94b5;font-size:12px;text-align:center;line-height:1.8}
-.modal{display:none;position:fixed;inset:0;background:#000b;z-index:50;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.modal-box{width:100%;max-width:460px;background:#171329;border:1px solid #7655a0;border-radius:18px;padding:20px}.modal-head{display:flex;justify-content:space-between;align-items:center}.close{background:#302644;border:0;color:white;border-radius:8px;padding:7px 10px}
-@media(max-width:850px){.catalog{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:600px){.wrap{padding:16px 12px 40px}.top-inner{padding:10px 12px}.brand{font-size:15px}.hero{padding:25px 19px}.catalog{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.item-image{height:115px}.store-layout{grid-template-columns:1fr}.section-head h2{font-size:19px}.stats{gap:7px}.stat{padding:9px}.stat strong{font-size:16px}.lang-select{max-width:125px;padding:8px 6px}}
+:root{--bg:#08051c;--panel:#100d32;--panel2:#171044;--line:#5638a6;--purple:#a12cff;--cyan:#29d9ff;--gold:#ffc52f;--text:#fff;--muted:#c8c2e7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:Arial,"Noto Sans Myanmar",sans-serif;background:radial-gradient(ellipse at 50% 15%,#27116c 0,transparent 38%),radial-gradient(ellipse at 0 75%,#351078 0,transparent 25%),linear-gradient(145deg,#060416,#10072d 55%,#050516);min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer}
+.ticker{height:38px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(90deg,#10071d,#32104d,#10071d);border-bottom:1px solid #9b47ff66;white-space:nowrap;font-size:13px;font-weight:800}.tv{background:#e9004d;padding:10px 18px;margin-right:10px}.breaking{background:#ed151d;padding:10px 18px;margin-right:18px}.ticker span{color:#ffdb43}.ticker b{color:#fff;margin:0 10px}
+header{position:sticky;top:0;z-index:30;background:#08051ded;backdrop-filter:blur(14px);border-bottom:1px solid #6339c7}.head{max-width:1280px;margin:auto;min-height:70px;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:13px;font-size:27px;font-weight:900;letter-spacing:.5px}.logo{width:49px;height:49px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(140deg,#d34cff,#394cff);box-shadow:0 0 22px #923cff;font-size:30px}.head-actions{display:flex;gap:10px;align-items:center}.lang,.account{border:1px solid #8b49e8;background:#171044;color:white;border-radius:13px;padding:11px 14px}.account{background:linear-gradient(100deg,#b328ff,#5135ff);font-weight:800;box-shadow:0 0 18px #8b37ff66}
+.wrap{max-width:1280px;margin:auto;padding:16px 24px 28px}
+.hero{min-height:380px;border:1px solid #7939e5;border-radius:22px;overflow:hidden;position:relative;padding:30px;background:radial-gradient(ellipse at 76% 45%,#4930a8 0,transparent 36%),radial-gradient(ellipse at 60% 85%,#143f9b 0,transparent 42%),linear-gradient(100deg,#090522 0%,#17104c 55%,#190b39 100%);box-shadow:0 0 35px #6926d455}
+.hero:before{content:"✦  ✧      ◆       ✦       ✧";position:absolute;inset:12px 0 auto 52%;font-size:34px;letter-spacing:30px;color:#e5b4ff66;text-shadow:0 0 18px #bb3fff}
+.hero:after{content:"";position:absolute;width:390px;height:390px;right:8%;top:10px;border-radius:50%;background:radial-gradient(circle,#a24dff66 0,transparent 65%);filter:blur(15px)}
+.hero-copy{position:relative;z-index:2;max-width:600px}.eyebrow{font-size:15px;color:#d5b5ff;font-weight:900;letter-spacing:1.4px}.hero h1{font-size:clamp(38px,5.3vw,66px);line-height:1.03;margin:14px 0}.hero h1 span{background:linear-gradient(90deg,#d943ff,#39dfff);color:transparent;background-clip:text}.hero p{font-size:16px;line-height:1.55;color:#e0d9f7;max-width:500px;margin:14px 0}
+.hero-buttons{display:flex;gap:12px;margin:18px 0}.btn{border:0;border-radius:14px;padding:13px 20px;font-weight:900}.primary{color:white;background:linear-gradient(100deg,#c42aff,#533dff);box-shadow:0 0 20px #9d38ff88}.outline{color:white;background:#100a36;border:2px solid #c6a3ff;box-shadow:0 0 12px #9f59ff55}
+.hero-art{position:absolute;right:2%;top:8%;width:47%;height:88%;display:flex;align-items:center;justify-content:center;z-index:1;pointer-events:none}.hero-art .orb{width:min(31vw,350px);height:min(31vw,350px);border-radius:50%;border:2px solid #b74aff88;box-shadow:0 0 45px #8d3cffaa,inset 0 0 55px #5422b9;background:radial-gradient(circle at 35% 30%,#c3a5ff,#5731c9 35%,#100b3a 72%);display:grid;place-items:center;font-size:clamp(90px,15vw,180px);text-shadow:0 0 25px #fff}.mlbb-mark{position:absolute;bottom:2%;left:15%;font-size:24px;font-weight:1000;color:#ffd66b;text-shadow:0 3px 5px #000,0 0 18px #ff8d00}
+.stats{display:flex;gap:12px;margin-top:20px;max-width:560px}.stat{min-width:0;flex:1;padding:10px 13px;border-radius:13px;background:#09051fce;border:1px solid #6840b8;display:flex;align-items:center;gap:10px}.stat i{font-style:normal;font-size:25px}.stat strong{display:block;font-size:21px}.stat small{color:#d0c7ed;font-size:11px}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:17px}.catalog-panel,.panel{background:linear-gradient(145deg,#100d32f5,#0b0926f5);border:1px solid #6241b6;border-radius:19px;padding:16px;box-shadow:0 0 18px #5a2cb633}.catalog-title{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}.catalog-title h2{font-size:22px;margin:0}.catalog-title p{margin:3px 0 0;color:#d2c9ed;font-size:12px}.tag{background:linear-gradient(100deg,#9e31ff,#4e3dff);border-radius:30px;padding:8px 16px;font-weight:900;font-size:12px}
+.tabs{display:flex;gap:8px;margin:12px 0}.tab{border:0;border-radius:10px;padding:9px 17px;background:#1b1744;color:#e7e1ff;font-weight:800}.tab.active{background:linear-gradient(100deg,#bc3aff,#5d42ff);box-shadow:0 0 14px #a52dff88}
+.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}.tile{border:1px solid #34286f;border-radius:14px;background:linear-gradient(150deg,#171344,#0d0a2b);padding:9px 5px;text-align:center;min-width:0;color:white;transition:.18s}.tile:hover{border-color:#bd6aff;transform:translateY(-2px);box-shadow:0 0 14px #7c3bff66}.tile .ico{width:57px;height:57px;margin:0 auto 6px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#4424a7,#16184b);font-size:34px;box-shadow:inset 0 0 12px #a94bff55}.tile strong{display:block;font-size:12px;line-height:1.2;min-height:29px}.tile small{display:block;color:#bfb5e6;font-size:10px;margin-top:4px}
+.lower{display:grid;grid-template-columns:minmax(0,2.15fr) minmax(260px,.85fr);gap:14px;margin-top:17px;align-items:stretch}
+.topup-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.topup-head h2{font-size:22px;margin:0}.topup-head p{color:#e4bd53;margin:4px 0 0;font-size:12px;font-weight:700}
+.order-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:14px}.panel h3{margin:0 0 11px;font-size:17px}.packages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.pkg{min-height:67px;text-align:center;border:1px solid #6541a9;background:linear-gradient(145deg,#28175d,#15103c);color:white;border-radius:12px;padding:10px 5px;font-weight:800}.pkg.selected{border:2px solid #d28bff;background:linear-gradient(145deg,#51278b,#22205f);box-shadow:0 0 14px #a12cff77}.pkg strong{display:block;font-size:14px}.pkg small{display:block;margin-top:4px;color:#fff;font-size:13px}.field{margin:8px 0}.field label{display:block;font-size:11px;color:#d8d0ef;margin-bottom:5px}.field input,.field select{width:100%;padding:11px;border-radius:9px;border:1px solid #4c3c8d;background:#171342;color:white;outline:none}.payment{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.pay{border:1px solid #6550a2;background:#20194e;color:white;border-radius:10px;padding:9px;font-weight:900}.pay.selected{border:2px solid #e1a1ff;background:#3c2372}.pay em{display:inline-grid;place-items:center;font-style:normal;width:23px;height:23px;border-radius:7px;margin-right:5px;background:#0878d3}.pay.wave em{background:#ffcc00;color:#161000}.notice{margin-top:10px;background:#191544;border:1px solid #46357f;border-radius:10px;padding:9px;color:#f3d76a;font-size:11px;line-height:1.5}.confirm{width:100%;margin-top:9px;padding:13px}.msg{font-size:12px;color:#dcbaff;min-height:18px;line-height:1.5}
+.coc{display:flex;flex-direction:column}.coc-visual{flex:1;min-height:170px;border-radius:14px;background:radial-gradient(circle at 50% 45%,#9a3aff,#27145c 58%,#0d0929);display:grid;place-items:center;font-size:100px;text-shadow:0 0 25px #ffb42e;overflow:hidden}.coc h2{font-size:20px;margin:0}.coc p{font-size:12px;color:#d5cbea;margin:4px 0 10px}.coming{margin-top:10px;background:linear-gradient(100deg,#ffc52f,#ff9a12);border:0;border-radius:11px;padding:13px;color:#1b1025;font-weight:1000}
+footer{max-width:1280px;margin:16px auto 0;border-top:1px solid #7541c7;padding:18px 24px;text-align:center;color:#d3c9ed;font-size:12px}
+.modal{display:none;position:fixed;inset:0;background:#000c;z-index:60;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.modalbox{max-width:400px;width:100%;background:#130e38;border:1px solid #a45bff;border-radius:18px;padding:20px}.modalbox button{width:100%;margin-top:10px}
+@media(max-width:850px){.wrap{padding:13px}.head{padding:9px 13px}.hero-art{right:-7%;opacity:.65}.dual{grid-template-columns:1fr}.lower{grid-template-columns:1fr}.coc-visual{min-height:140px}.cards{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:560px){.ticker{font-size:10px;height:32px}.tv,.breaking{padding:8px}.brand{font-size:18px}.logo{width:39px;height:39px}.lang{display:none}.account{padding:9px 12px}.hero{padding:22px 17px;min-height:390px}.hero-art{width:100%;height:47%;top:auto;bottom:0;right:-15%;opacity:.34}.hero h1{font-size:40px}.hero p{font-size:13px;max-width:95%}.stats{gap:6px}.stat{padding:8px 6px;gap:5px}.stat i{font-size:19px}.stat strong{font-size:16px}.stat small{font-size:9px}.catalog-panel{padding:12px}.catalog-title h2{font-size:17px}.cards{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.tile{padding:7px 2px}.tile .ico{width:42px;height:42px;font-size:25px}.tile strong{font-size:9px;min-height:26px}.tile small{font-size:8px}.order-layout{grid-template-columns:1fr}.topup-head h2{font-size:18px}.coc-visual{font-size:85px}.wrap{padding-bottom:18px}}
 </style>
 </head>
 <body>
-<header class="topbar"><div class="top-inner">
-<a class="brand" href="#home"><span class="brand-mark">✦</span><span>AURA TOP UP</span></a>
-<div class="top-actions"><select class="lang-select" id="language" aria-label="Language"><option>🇲🇲 မြန်မာ</option></select><button class="login-mini" onclick="document.getElementById('topup').classList.add('open');document.getElementById('topup').scrollIntoView({behavior:'smooth'})">MLBB Top Up</button></div>
-</div></header>
+<div class="ticker"><div class="tv">TV ◖))</div><div class="breaking">BREAKING NEWS</div><span>AURA TOP UP</span><b>•</b> Demo Storefront <b>•</b> No real payments <b>•</b> Enjoy your gaming journey!</div>
+<header><div class="head"><div class="brand"><span class="logo">✦</span>AURA TOP UP</div><div class="head-actions"><select class="lang" aria-label="Language"><option>🇲🇲 မြန်မာ</option></select><button class="account" onclick="openAccount()">♟ Account / Login</button></div></div></header>
 <main class="wrap">
-<section class="hero" id="home"><div class="hero-content">
-<div class="eyebrow">✦ AURA DIGITAL STORE</div><h1>သင့်ရဲ့ Gaming World ကို <span>အဆင့်မြှင့်လိုက်ပါ</span></h1>
-<p>Game နဲ့ App ဝန်ဆောင်မှုများကို တစ်နေရာတည်းမှာ ရှာဖွေကြည့်ရှုနိုင်ပါတယ်။ လက်ရှိ Demo စနစ်ဖြစ်ပြီး အမှန်တကယ် ငွေပေးချေမှု မပြုလုပ်ပါ။</p>
-<div class="hero-buttons"><button class="btn btn-primary" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">Game များကြည့်ရန်</button><button class="btn btn-ghost" onclick="openMLBB()">MLBB Top Up</button></div>
-<div class="stats"><div class="stat"><strong>1</strong><small>ဈေးနှုန်းသတ်မှတ်ထားသော Game</small></div><div class="stat"><strong>24+</strong><small>Games & Apps</small></div><div class="stat"><strong>24/7</strong><small>Browse Anytime</small></div></div>
-</div></section>
-<section class="section"><div class="field" style="max-width:560px;margin:0 auto"><label for="catalogSearch">🔎 Game / App ရှာရန်</label><input id="catalogSearch" type="search" placeholder="MLBB, PUBG, TikTok..." oninput="searchCatalog(this.value)"></div></section>
-<section class="section" id="games"><div class="section-head"><div><h2>🎮 Games</h2><p>နှစ်သက်ရာ Game ကို ရွေးချယ်ပါ</p></div><span class="pill">GAMES</span></div><div class="category-tabs"><button class="tab active" onclick="filterCatalog('all','games',this)">အားလုံး</button><button class="tab" onclick="filterCatalog('available','games',this)">ရရှိနိုင်</button><button class="tab" onclick="filterCatalog('soon','games',this)">မကြာမီ</button></div><div class="catalog" id="gamesCatalog"></div></section>
-<section class="section" id="apps"><div class="section-head"><div><h2>📱 Apps & Digital Services</h2><p>App နှင့် Digital Product များကို ကြည့်ရှုပါ</p></div><span class="pill">APPS</span></div><div class="category-tabs"><button class="tab active" onclick="filterCatalog('all','apps',this)">အားလုံး</button><button class="tab" onclick="filterCatalog('soon','apps',this)">မကြာမီ</button></div><div class="catalog" id="appsCatalog"></div></section>
-<section class="section" id="topup"><div class="section-head"><div><h2>💎 Mobile Legends: Bang Bang</h2><p>Diamond • Weekly Pass • Twilight Pass</p></div><span class="pill">MLBB</span></div>
-<div class="panel" style="margin-bottom:14px"><button class="btn btn-ghost" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">← Game စာရင်းသို့ ပြန်သွားရန်</button><p class="payment-note">MLBB အတွက်သာ ဈေးနှုန်းသတ်မှတ်ထားသည်။ အခြား Game / App များမှာ မကြာမီလာမည်။</p></div>
-<div class="store-layout">
-<div class="panel"><h3>Package ရွေးချယ်ပါ</h3><div class="product-list" id="productList">
-<button class="product-choice" onclick="selectProduct('7900','Weekly Diamond Pass',this)"><strong>⭐ Weekly Diamond Pass</strong><small>7,900 MMK</small></button>
-<button class="product-choice disabled" onclick="showSoon('Twilight Pass')"><strong>🌙 Twilight Pass</strong><small>ဈေးနှုန်း မသတ်မှတ်ရသေး</small></button>
-<button class="product-choice" onclick="selectProduct('2550','86 Diamonds',this)"><strong>💎 86 Diamonds</strong><small>2,550 MMK</small></button>
-<button class="product-choice" onclick="selectProduct('4800','172 Diamonds',this)"><strong>💎 172 Diamonds</strong><small>4,800 MMK</small></button>
-<button class="product-choice" onclick="selectProduct('8000','257 Diamonds',this)"><strong>💎 257 Diamonds</strong><small>8,000 MMK</small></button>
-</div><div class="price-box" id="price">0 MMK</div><div class="notice">ဈေးနှုန်းများသည် Demo ပြသရန်သာ ဖြစ်သည်။ ဈေးနှုန်းနှင့် ပစ္စည်းရရှိမှုကို တရားဝင်ရောင်းချသူထံ အတည်ပြုရန် လိုအပ်သည်။ 2X Bonus သို့မဟုတ် အမှန်တကယ် Diamond ပို့ဆောင်မှုကို အာမမခံပါ။</div></div>
-<div class="panel"><h3>Order အချက်အလက်</h3>
-<div class="field"><label for="playerID">Player ID</label><input id="playerID" inputmode="numeric" placeholder="Player ID ထည့်ပါ"></div>
-<div class="field"><label for="serverID">Server ID</label><input id="serverID" inputmode="numeric" placeholder="Server ID ထည့်ပါ"></div>
-<div class="field"><label>Demo Payment Method</label><div class="pay-row">
-<button type="button" class="pay-choice" onclick="choosePayment('KBZPay',this)"><span class="payment-logo kbz-logo">K</span><span>KBZPay</span></button>
-<button type="button" class="pay-choice" onclick="choosePayment('WavePay',this)"><span class="payment-logo wave-logo">W</span><span>WavePay</span></button>
-</div><input type="hidden" id="paymentMethod"><div class="payment-note">Icon များသည် ပြသရန်အတွက်သာ ဖြစ်သည်။ ငွေလွှဲရန်မလိုပါ။ PIN၊ OTP သို့မဟုတ် ဘဏ်အချက်အလက် မထည့်ပါနှင့်။</div></div>
-<div class="field"><label for="transactionID">Test Reference (optional)</label><input id="transactionID" placeholder="DEMO-12345"></div>
-<button class="btn btn-primary" style="width:100%" onclick="demoOrder()">Confirm Demo Order</button><p id="message" aria-live="polite"></p>
-<div class="notice">DEMO ONLY — ငွေမလွှဲပါနှင့်။ ဒီ Website မှာ အမှန်တကယ် Payment မရှိသလို Diamond ပို့ပေးခြင်းလည်း မရှိပါ။</div>
-</div></div></section>
-<footer class="footer"><strong>AURA TOP UP</strong><br>Demo storefront • No real payments • No real top-up fulfillment<br>© 2026 AURA TOP UP</footer>
+<section class="hero" id="home"><div class="hero-copy"><div class="eyebrow">✦ AURA DIGITAL STORE</div><h1>Level Up Your<br><span>Gaming World</span></h1><p>Explore games and digital services in one place.<br>This is a demo storefront; no real payments are processed.</p><div class="hero-buttons"><button class="btn primary" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">🎮 Explore Games</button><button class="btn outline" onclick="openMLBB()">💎 Top Up Now</button></div><div class="stats"><div class="stat"><i>🌐</i><div><strong>3</strong><small>Languages</small></div></div><div class="stat"><i>🎮</i><div><strong>24+</strong><small>Games & Apps</small></div></div><div class="stat"><i>⚡</i><div><strong>24/7</strong><small>Browse Anytime</small></div></div></div></div><div class="hero-art"><div class="orb">⚔️</div><div class="mlbb-mark">✦ MOBILE LEGENDS</div></div></section>
+<div class="dual" id="games">
+<section class="catalog-panel"><div class="catalog-title"><div><h2>🎮 Games</h2><p>Choose your favorite game</p></div><span class="tag">GAMES</span></div><div class="tabs"><button class="tab active" onclick="filterItems('games','all',this)">All</button><button class="tab" onclick="filterItems('games','available',this)">Available</button><button class="tab" onclick="filterItems('games','soon',this)">Coming Soon</button></div><div class="cards" id="gamesCards"></div></section>
+<section class="catalog-panel"><div class="catalog-title"><div><h2>📱 Apps & Digital Services</h2><p>Explore apps and digital products</p></div><span class="tag">APPS</span></div><div class="tabs"><button class="tab active" onclick="filterItems('apps','all',this)">All</button><button class="tab" onclick="filterItems('apps','available',this)">Available</button><button class="tab" onclick="filterItems('apps','soon',this)">Coming Soon</button></div><div class="cards" id="appsCards"></div></section>
+</div>
+<div class="lower">
+<section class="panel" id="topup"><div class="topup-head"><div><h2>💎 MLBB Diamond Top Up</h2><p>Mobile Legends: Bang Bang</p></div><span class="tag">MLBB</span></div><div class="order-layout"><div><h3>Select Package</h3><div class="packages">
+<button class="pkg" onclick="selectPkg('Weekly Diamond Pass',7900,this)">💎 <strong>Weekly Pass</strong><small>7,900 MMK</small></button>
+<button class="pkg" onclick="selectPkg('86 Diamonds',2550,this)">💎 <strong>86 Diamonds</strong><small>2,550 MMK</small></button>
+<button class="pkg" onclick="selectPkg('172 Diamonds',4800,this)">💎 <strong>172 Diamonds</strong><small>4,800 MMK</small></button>
+<button class="pkg" onclick="selectPkg('257 Diamonds',8000,this)">💎 <strong>257 Diamonds</strong><small>8,000 MMK</small></button>
+<button class="pkg" style="grid-column:1/-1" onclick="showSoon('Twilight Pass')">🌙 <strong>Twilight Pass</strong><small>Coming Soon • Price not set</small></button>
+</div><div class="notice">⚠️ Prices are for demo display only. Placing an order does not deliver real diamonds.</div></div>
+<div><h3>Order Details</h3><div class="msg">Login required • Demo order only</div><div class="field"><label>Player ID</label><input id="playerID" placeholder="Enter Player ID"></div><div class="field"><label>Server ID</label><input id="serverID" placeholder="Enter Server ID"></div><div class="payment"><button class="pay" onclick="choosePay('KBZPay',this)"><em>K</em> KBZPay</button><button class="pay wave" onclick="choosePay('WavePay',this)"><em>W</em> WavePay</button></div><div class="field"><label>Test Reference (optional)</label><input id="reference" placeholder="DEMO-12345"></div><button class="btn primary confirm" onclick="demoOrder()">➤ Confirm Demo Order</button><div class="msg" id="message"></div></div></div></section>
+<aside class="panel coc"><div class="topup-head"><div><h2>🏰 Clash of Clans</h2><p>Player Tag / Supercell ID service</p></div><span class="tag">COC</span></div><div class="coc-visual">👑</div><div class="field"><input placeholder="Enter Player Tag (#ABC123XYZ)" disabled></div><button class="coming" onclick="showSoon('Clash of Clans')">◷ Coming Soon</button></aside>
+</div>
 </main>
-<div class="modal" id="soonModal" onclick="if(event.target===this)closeSoon()"><div class="modal-box"><div class="modal-head"><h3 id="soonTitle">Coming Soon</h3><button class="close" onclick="closeSoon()">✕</button></div><p id="soonText" style="color:#c9bbdd;line-height:1.7">ဒီ Game / App အတွက် ဈေးနှုန်းနှင့် ဝန်ဆောင်မှု မသတ်မှတ်ရသေးပါ။</p><button class="btn btn-primary" style="width:100%" onclick="closeSoon()">ပိတ်မည်</button></div></div>
-<script>
-const gameItems=[
-{name:'Mobile Legends',icon:'💎',desc:'Diamond • Weekly Pass • Twilight Pass',status:'available',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=700&q=80',action:'mlbb'},
-{name:'PUBG Mobile',icon:'🎯',desc:'UC packages',status:'soon',img:'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=700&q=80'},
-{name:'Free Fire',icon:'🔥',desc:'Diamonds',status:'soon',img:'https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=700&q=80'},
-{name:'Honor of Kings',icon:'⚔️',desc:'Tokens',status:'soon',img:'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=700&q=80'},
-{name:'Clash of Clans',icon:'🏰',desc:'Gems',status:'soon',img:'https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=700&q=80'},
-{name:'Genshin Impact',icon:'🌌',desc:'Genesis Crystals',status:'soon',img:'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80'},
-{name:'Honkai: Star Rail',icon:'🚄',desc:'Oneiric Shards',status:'soon',img:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80'},
-{name:'Wuthering Waves',icon:'🌊',desc:'Lunites',status:'soon',img:'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=700&q=80'},
-{name:'Delta Force',icon:'🪖',desc:'Game credits',status:'soon',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=700&q=80'},
-{name:'Blood Strike',icon:'🎮',desc:'Gold',status:'soon',img:'https://images.unsplash.com/photo-1493711662062-fa541e6b6f?auto=format&fit=crop&w=700&q=80'},
-{name:'Arena Breakout',icon:'🛡️',desc:'Bonds',status:'soon',img:'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=700&q=80'},
-{name:'Roblox',icon:'🧱',desc:'Robux',status:'soon',img:'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=700&q=80'},
-{name:'Magic Chess Go Go',icon:'♟️',desc:'In-game items',status:'soon',img:'https://images.unsplash.com/photo-1606503153255-59d8b8b82188?auto=format&fit=crop&w=700&q=80'},
-{name:'EA SPORTS FC Mobile',icon:'⚽',desc:'FC Points',status:'soon',img:'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=700&q=80'},
-{name:'Valorant',icon:'🎯',desc:'VP',status:'soon',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=700&q=80'}];
-const appItems=[
-{name:'Facebook',icon:'ⓕ',desc:'Digital services',status:'soon',img:'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=700&q=80'},
-{name:'TikTok',icon:'♪',desc:'Coins / services',status:'soon',img:'https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=700&q=80'},
-{name:'Telegram Premium',icon:'✈️',desc:'Subscription',status:'soon',img:'https://images.unsplash.com/photo-1611746872915-64382b5c76da?auto=format&fit=crop&w=700&q=80'},
-{name:'Telegram Stars',icon:'⭐',desc:'Digital stars',status:'soon',img:'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=700&q=80'},
-{name:'CapCut',icon:'✂️',desc:'Video editing subscription',status:'soon',img:'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=700&q=80'},
-{name:'ChatGPT',icon:'✳️',desc:'Plan information',status:'soon',img:'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=700&q=80'},
-{name:'Gemini',icon:'✨',desc:'AI services',status:'soon',img:'https://images.unsplash.com/photo-1676299081847-824916de030a?auto=format&fit=crop&w=700&q=80'},
-{name:'Spotify',icon:'♫',desc:'Music subscription',status:'soon',img:'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=80'},
-{name:'Netflix',icon:'N',desc:'Streaming subscription',status:'soon',img:'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=700&q=80'},
-{name:'Canva',icon:'✿',desc:'Design subscription',status:'soon',img:'https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=700&q=80'},
-{name:'Zoom',icon:'📹',desc:'Meeting subscription',status:'soon',img:'https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&w=700&q=80'},
-{name:'Duolingo',icon:'🦉',desc:'Learning subscription',status:'soon',img:'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=700&q=80'},
-{name:'Bigo Live',icon:'📺',desc:'In-app services',status:'soon',img:'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=700&q=80'},
-{name:'Likee',icon:'❤️',desc:'In-app services',status:'soon',img:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80'},
-{name:'Steam Wallet',icon:'🎮',desc:'Wallet codes',status:'soon',img:'https://images.unsplash.com/photo-1493711662062-fa541e6b6f?auto=format&fit=crop&w=700&q=80'},
-{name:'Google Play',icon:'▶️',desc:'Gift cards',status:'soon',img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80'},
-{name:'Apple Gift Card',icon:'',desc:'Gift cards',status:'soon',img:'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=700&q=80'}];
-let gameFilter='all',appFilter='all',selectedPrice='',selectedProductName='';
-function cardHTML(item){const isML=item.action==='mlbb';return `<article class="item-card"><div class="item-image"><img src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'"><span class="item-icon">${item.icon}</span></div><div class="item-body"><h3>${item.name}</h3><p>${item.desc}</p><div class="item-foot"><span class="status ${isML?'':'soon'}">${isML?'ရရှိနိုင်':'မကြာမီ'}</span><button class="small-btn" onclick="${isML?'openMLBB()':`showSoon('${item.name.replace(/'/g,'')}')`}">${isML?'Top Up':'ကြည့်ရန်'}</button></div></div></article>`}
-function renderCatalog(type){const items=type==='games'?gameItems:appItems,filter=type==='games'?gameFilter:appFilter,target=document.getElementById(type==='games'?'gamesCatalog':'appsCatalog');target.innerHTML=items.filter(x=>filter==='all'||(filter==='available'?x.status==='available':x.status==='soon')).map(cardHTML).join('')}
-function filterCatalog(filter,type,button){if(type==='games')gameFilter=filter;else appFilter=filter;button.parentElement.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));button.classList.add('active');renderCatalog(type)}
-function openMLBB(){const section=document.getElementById('topup');section.classList.add('open');section.scrollIntoView({behavior:'smooth',block:'start'})}
-function showSoon(name){document.getElementById('soonTitle').textContent=name+' • မကြာမီ';document.getElementById('soonText').textContent='ဒီ Game / App အတွက် ဈေးနှုန်းနဲ့ ဝန်ဆောင်မှု မသတ်မှတ်ရသေးပါ။ လက်ရှိမှာ MLBB တစ်ခုတည်းကိုသာ Demo ဈေးနှုန်းပြထားပါတယ်။';document.getElementById('soonModal').classList.add('show')}
-function closeSoon(){document.getElementById('soonModal').classList.remove('show')}
-function selectProduct(price,name,button){selectedPrice=price;selectedProductName=name;document.querySelectorAll('.product-choice').forEach(b=>b.classList.remove('selected'));button.classList.add('selected');document.getElementById('price').textContent=Number(price).toLocaleString('en-US')+' MMK'}
-function choosePayment(method,button){document.getElementById('paymentMethod').value=method;document.querySelectorAll('.pay-choice').forEach(b=>b.classList.remove('selected'));button.classList.add('selected')}
-function searchCatalog(query){const q=String(query||'').trim().toLowerCase();for(const [type,items] of [['games',gameItems],['apps',appItems]])document.getElementById(type==='games'?'gamesCatalog':'appsCatalog').innerHTML=items.filter(x=>(x.name+' '+x.desc).toLowerCase().includes(q)).map(cardHTML).join('')}
-function demoOrder(){const player=document.getElementById('playerID').value.trim(),server=document.getElementById('serverID').value.trim(),payment=document.getElementById('paymentMethod').value,transaction=document.getElementById('transactionID').value.trim(),message=document.getElementById('message');if(!player||!server||!selectedPrice||!payment){message.textContent='Player ID၊ Server ID၊ Package နဲ့ Demo Payment Method ကို ဖြည့်ပါ။';return}const order={playerID:player,serverID:server,product:selectedProductName,price:Number(selectedPrice),paymentMethod:payment,transactionID:transaction||'DEMO-ONLY',status:'Demo only',createdAt:new Date().toISOString()};let orders=[];try{orders=JSON.parse(localStorage.getItem('auraDemoOrders')||'[]')}catch(e){}orders.push(order);localStorage.setItem('auraDemoOrders',JSON.stringify(orders));message.textContent='Demo Order ကို ဒီဖုန်း Browser ထဲမှာသာ သိမ်းထားပါတယ်။ အမှန်တကယ် Payment သို့မဟုတ် Top Up မဖြစ်ပါ။';}
-renderCatalog('games');renderCatalog('apps');
+<section class="panel" id="adminDashboard" style="display:none;margin-top:16px">
+  <div class="topup-head"><div><h2>🛡️ Admin Dashboard</h2><p>Order management • Admin only</p></div><span class="tag">ADMIN</span></div>
+  <div class="stats" style="max-width:100%;margin:10px 0">
+    <div class="stat"><div><strong id="pendingCount">0</strong><small>Pending</small></div></div>
+    <div class="stat"><div><strong id="completedCount">0</strong><small>Completed</small></div></div>
+    <div class="stat"><div><strong id="totalCount">0</strong><small>Total Orders</small></div></div>
+  </div>
+  <button class="btn primary" onclick="auraLoadAdminOrders()">↻ Load Admin Orders</button>
+  <div id="adminMessage" class="msg" style="margin:10px 0"></div>
+  <div id="ordersList" style="overflow-x:auto"></div>
+</section>
+<footer>✦ <b>AURA TOP UP</b>　 © 2026 AURA TOP UP | Demo storefront • No real payments • No real top-up fulfilment</footer>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="modalbox"><h3 id="modalTitle">Coming Soon</h3><p id="modalText" style="color:#d2c9ed;line-height:1.6">This service is coming soon.</p><button class="btn primary" onclick="closeModal()">Close</button></div></div>
+<div class="modal" id="accountModal"><div class="modalbox">
+  <h3>🔐 AURA Account</h3><p id="authStatus" style="color:#d2c9ed">Login to place a demo order.</p>
+  <button class="btn primary" style="width:100%;margin:5px 0" onclick="auraGoogleLogin()">Continue with Google</button>
+  <button class="btn outline" style="width:100%;margin:5px 0" onclick="auraFacebookLogin()">Continue with Facebook</button>
+  <div class="field"><label>Phone number (include country code)</label><input id="phoneNumber" placeholder="+959xxxxxxxxx"></div>
+  <div id="recaptcha-container"></div>
+  <button class="btn outline" style="width:100%;margin:5px 0" onclick="auraSendPhoneCode()">Send phone code</button>
+  <div class="field"><label>SMS verification code</label><input id="phoneCode" placeholder="Enter SMS code"></div>
+  <button class="btn outline" style="width:100%;margin:5px 0" onclick="auraVerifyPhoneCode()">Verify phone code</button>
+  <button class="btn" style="width:100%;margin:5px 0;background:#29234f;color:white" onclick="auraLogout()">Logout</button>
+  <button class="btn" style="width:100%;margin:5px 0;background:#29234f;color:white" onclick="closeAccount()">Close</button>
+</div></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import {
+  getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup,
+  signOut, onAuthStateChanged, RecaptchaVerifier, signInWithPhoneNumber
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+import {
+  getFirestore, collection, addDoc, getDocs, doc, updateDoc,
+  serverTimestamp, query, orderBy
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDkCgqgLy2GC_kNbReVdzUnyULYnNEYjkI",
+  authDomain: "aura-top-up-fd609.firebaseapp.com",
+  projectId: "aura-top-up-fd609",
+  storageBucket: "aura-top-up-fd609.firebasestorage.app",
+  messagingSenderId: "822916904997",
+  appId: "1:822916904997:web:c6de6a6ace7059f6e527cc",
+  measurementId: "G-F1JJT3P1VQ"
+};
+const ADMIN_EMAIL = "ak0061266@gmail.com";
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
+let confirmationResult = null;
+let recaptchaVerifier = null;
+let selected = null;
+let payment = "";
+const games=[['Mobile Legends','✦','available'],['PUBG Mobile','🎯','soon'],['Free Fire','🔥','soon'],['Honor of Kings','⚔️','soon'],['Clash of Clans','👑','soon'],['Genshin Impact','🌌','soon'],['Roblox','🧱','soon']];
+const apps=[['Facebook','f','soon'],['TikTok','♪','soon'],['Telegram Premium','✈','soon'],['Spotify','♫','soon'],['Netflix','N','soon'],['CapCut','✂','soon'],['ChatGPT','✳','soon']];
+let filters={games:'all',apps:'all'};
+function render(type){const list=type==='games'?games:apps;document.getElementById(type==='games'?'gamesCards':'appsCards').innerHTML=list.filter(x=>filters[type]==='all'||x[2]===filters[type]).slice(0,5).map(x=>`<button class="tile" onclick="${x[2]==='available'?'openMLBB()':`showSoon('${x[0]}')`}"><span class="ico">${x[1]}</span><strong>${x[0]}</strong><small>${x[2]==='available'?'Available':'Coming Soon'}</small></button>`).join('')}
+window.filterItems=(type,filter,btn)=>{filters[type]=filter;btn.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');render(type)};
+window.openMLBB=()=>{document.getElementById('topup').scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('topup').style.boxShadow='0 0 25px #a12cff88'};
+window.selectPkg=(name,price,btn)=>{selected={name,price};document.querySelectorAll('.pkg').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected')};
+window.choosePay=(method,btn)=>{payment=method;document.querySelectorAll('.pay').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected')};
+window.showSoon=(name)=>{document.getElementById('modalTitle').textContent=name+' • Coming Soon';document.getElementById('modalText').textContent='This game or service is not configured yet. Only MLBB has demo prices at the moment.';document.getElementById('modal').classList.add('show')};
+window.closeModal=()=>document.getElementById('modal').classList.remove('show');
+window.openAccount=()=>document.getElementById('accountModal').classList.add('show');
+window.closeAccount=()=>document.getElementById('accountModal').classList.remove('show');
+
+window.auraGoogleLogin=async()=>{try{await signInWithPopup(auth,googleProvider);document.getElementById('authStatus').textContent='Signed in successfully.';}catch(e){alert('Google login failed: '+e.message)}};
+window.auraFacebookLogin=async()=>{try{await signInWithPopup(auth,facebookProvider);document.getElementById('authStatus').textContent='Signed in successfully.';}catch(e){alert('Facebook login failed: '+e.message)}};
+window.auraSendPhoneCode=async()=>{
+  const phone=document.getElementById('phoneNumber').value.trim();
+  if(!phone.startsWith('+')){alert('Enter phone number with country code, e.g. +95...');return}
+  try{
+    if(!recaptchaVerifier) recaptchaVerifier=new RecaptchaVerifier(auth,'recaptcha-container',{size:'normal'});
+    confirmationResult=await signInWithPhoneNumber(auth,phone,recaptchaVerifier);
+    alert('SMS verification code sent.');
+  }catch(e){alert('Could not send code: '+e.message);if(recaptchaVerifier){try{await recaptchaVerifier.clear()}catch(_){}recaptchaVerifier=null}}
+};
+window.auraVerifyPhoneCode=async()=>{const code=document.getElementById('phoneCode').value.trim();if(!confirmationResult||!code){alert('Send the SMS code first, then enter it.');return}try{await confirmationResult.confirm(code);document.getElementById('authStatus').textContent='Phone verified and signed in.';}catch(e){alert('Verification failed: '+e.message)}};
+window.auraLogout=async()=>{try{await signOut(auth);document.getElementById('authStatus').textContent='Signed out.';document.getElementById('adminDashboard').style.display='none'}catch(e){alert(e.message)}};
+
+onAuthStateChanged(auth,user=>{
+  const status=document.getElementById('authStatus');
+  if(user){
+    status.textContent='Signed in: '+(user.email||user.phoneNumber||'Phone account');
+    document.querySelector('.account').textContent='♟ '+(user.displayName||user.email||'Account');
+    if(user.email===ADMIN_EMAIL){document.getElementById('adminDashboard').style.display='block';window.auraLoadAdminOrders();}
+    else document.getElementById('adminDashboard').style.display='none';
+  }else{
+    status.textContent='Login to place a demo order.';
+    document.querySelector('.account').textContent='♟ Account / Login';
+    document.getElementById('adminDashboard').style.display='none';
+  }
+});
+
+window.demoOrder=async()=>{
+  const user=auth.currentUser;
+  const id=document.getElementById('playerID').value.trim();
+  const server=document.getElementById('serverID').value.trim();
+  const msg=document.getElementById('message');
+  if(!user){msg.textContent='Please login before placing a demo order.';window.openAccount();return}
+  if(!id||!server||!selected||!payment){msg.textContent='Enter Player ID, Server ID, choose a package and demo payment method.';return}
+  try{
+    await addDoc(collection(db,'Orders'),{
+      uid:user.uid,userEmail:user.email||null,playerID:id,serverID:server,
+      product:selected.name,price:selected.price,paymentMethod:payment,
+      transactionID:document.getElementById('reference').value.trim()||'DEMO-ONLY',
+      status:'Pending',isDemo:true,createdAt:serverTimestamp()
+    });
+    msg.textContent='Demo order saved. No payment was collected and no diamonds were delivered.';
+    document.getElementById('reference').value='';
+  }catch(e){msg.textContent='Could not save order: '+e.message}
+};
+
+window.auraLoadAdminOrders=async()=>{
+  const user=auth.currentUser;
+  const message=document.getElementById('adminMessage');
+  const list=document.getElementById('ordersList');
+  if(!user||user.email!==ADMIN_EMAIL){message.textContent='Admin access only.';return}
+  message.textContent='Loading orders...';
+  try{
+    const snap=await getDocs(query(collection(db,'Orders'),orderBy('createdAt','desc')));
+    let pending=0,completed=0,rows='';
+    snap.forEach(d=>{
+      const o=d.data();if(o.status==='Completed')completed++;else pending++;
+      const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      rows+=`<tr><td>${safe(o.playerID)}</td><td>${safe(o.serverID)}</td><td>${safe(o.product)}</td><td>${safe(o.price)} MMK</td><td>${safe(o.paymentMethod)}</td><td>${safe(o.status)}</td><td><button class="tab" data-order="${d.id}" data-status="${safe(o.status)}">Mark Completed</button></td></tr>`;
+    });
+    document.getElementById('pendingCount').textContent=pending;
+    document.getElementById('completedCount').textContent=completed;
+    document.getElementById('totalCount').textContent=snap.size;
+    list.innerHTML=snap.empty?'No orders yet.':`<table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:12px"><thead><tr>${['Player ID','Server ID','Package','Price','Payment','Status','Action'].map(x=>`<th style="padding:9px;border-bottom:1px solid #6345a3;text-align:left">${x}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+    list.querySelectorAll('button[data-order]').forEach(btn=>btn.addEventListener('click',async()=>{
+      if(btn.dataset.status==='Completed'){message.textContent='This order is already completed.';return}
+      try{await updateDoc(doc(db,'Orders',btn.dataset.order),{status:'Completed'});message.textContent='Order status updated.';window.auraLoadAdminOrders()}
+      catch(e){message.textContent='Update failed: '+e.message}
+    }));
+    message.textContent='Orders loaded.';
+  }catch(e){message.textContent='Admin load failed: '+e.message+' (Check Firestore Rules).'}
+};
+
+render('games');render('apps');
 </script>
 </body></html>
